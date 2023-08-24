@@ -38,26 +38,26 @@ enum class MainMenuProps
 //
 enum class PVPMenuProps
 {
-    BkgLabelW = 440,
-    BkgLabelH = 589,
-    BkgLabelX = ((int)MainWindowProps::windowSizeW - BkgLabelW) / 2,
-    BkgLabelY = ((int)MainWindowProps::windowSizeH - BkgLabelH) / 2,
-    TopTextLabelX = BkgLabelX,
-    TopTextLabelY = BkgLabelY + 22,
-    TopTextLabelW = BkgLabelW,
+    BgLabelW = 440,
+    BgLabelH = 589,
+    BgLabelX = ((int)MainWindowProps::windowSizeW - BgLabelW) / 2,
+    BgLabelY = ((int)MainWindowProps::windowSizeH - BgLabelH) / 2,
+    TopTextLabelX = BgLabelX,
+    TopTextLabelY = BgLabelY + 22,
+    TopTextLabelW = BgLabelW,
     TopTextLabelH = 40,
-    GameVariantTextLabelX = BkgLabelX + 112,
+    GameVariantTextLabelX = BgLabelX + 112,
     GameVariantTextLabelY = TopTextLabelY + 72,
     GameVariantComboBoxX = GameVariantTextLabelX + 57,
     GameVariantComboBoxY = GameVariantTextLabelY - 8,
     GameVariantComboBoxW = 157,
     GameVariantComboBoxH = 41,
-    TimeControlBkgLabelX = BkgLabelX,
-    TimeControlBkgLabelY = GameVariantTextLabelY + 49,
-    TimeControlBkgLabelW = BkgLabelW,
-    TimeControlBkgLabelH = 323,
-    TimeControlTextLabelX = TimeControlBkgLabelX + 140,
-    TimeControlTextLabelY = TimeControlBkgLabelY + 16,
+    TimeControlBgLabelX = BgLabelX,
+    TimeControlBgLabelY = GameVariantTextLabelY + 49,
+    TimeControlBgLabelW = BgLabelW,
+    TimeControlBgLabelH = 323,
+    TimeControlTextLabelX = TimeControlBgLabelX + 140,
+    TimeControlTextLabelY = TimeControlBgLabelY + 16,
     TimeControlToggleSwitchX = TimeControlTextLabelX + 94,
     TimeControlToggleSwitchY = TimeControlTextLabelY - 10,
     MinutesTextLabelX = TimeControlTextLabelX + 5,
@@ -68,7 +68,7 @@ enum class PVPMenuProps
     MinutesNumberTextLabelH = 15,
     MinutesSliderW = 360,
     MinutesSliderH = 25,
-    MinutesSliderX = BkgLabelX + (BkgLabelW - MinutesSliderW) / 2,
+    MinutesSliderX = BgLabelX + (BgLabelW - MinutesSliderW) / 2,
     MinutesSliderY = MinutesTextLabelY + 30,
     IncSecondsTextLabelX = MinutesTextLabelX - 10,
     IncSecondsTextLabelY = MinutesSliderY + 44,
@@ -84,7 +84,7 @@ enum class PVPMenuProps
     QuickGamesTextLabelY = IncSecondsSliderY + 38,
     Bullet1MButtonW = 58,
     Bullet1MButtonH = 74,
-    Bullet1MButtonX = BkgLabelX + 15,
+    Bullet1MButtonX = BgLabelX + 15,
     Bullet1MButtonY = QuickGamesTextLabelY + 37,
     Blitz3MButtonX = Bullet1MButtonX + Bullet1MButtonW + 12,
     Blitz3MButtonY = Bullet1MButtonY,
@@ -98,7 +98,7 @@ enum class PVPMenuProps
     Rapid15MButtonY = Bullet1MButtonY,
     RandomColorButtonW = 90,
     RandomColorButtonH = RandomColorButtonW,
-    RandomColorButtonX = BkgLabelX + ((BkgLabelW - RandomColorButtonW) / 2),
+    RandomColorButtonX = BgLabelX + ((BgLabelW - RandomColorButtonW) / 2),
     RandomColorButtonY = Bullet1MButtonY + Bullet1MButtonH + 29,
     BlackColorButtonW = 70,
     BlackColorButtonH = BlackColorButtonW,
@@ -108,8 +108,8 @@ enum class PVPMenuProps
     WhiteColorButtonY = BlackColorButtonY,
     ReturnButtonW = 25,
     ReturnButtonH = 20,
-    ReturnButtonX = BkgLabelX + BkgLabelW - ReturnButtonW - 8,
-    ReturnButtonY = BkgLabelY + BkgLabelH - ReturnButtonH - 7,
+    ReturnButtonX = BgLabelX + BgLabelW - ReturnButtonW - 8,
+    ReturnButtonY = BgLabelY + BgLabelH - ReturnButtonH - 7,
 };
 
 enum class PVPMenuPushButtons
@@ -156,85 +156,97 @@ namespace StartGameButtonName
     extern QString WhiteColor;
 }
 
+namespace GameVariants
+{
+    extern QString Standard;
+    extern QString Chess960;
+    extern QString KingOfTheHill;
+    extern QString ThreeCheck;
+    extern QString Horde;
+    extern QString FromPosition;
+    extern QString HordeSymbolsVector2D;
+    extern QString StandardSymbolsVector2D;
+}
+
 //
 // SettingsMenu
 //
 enum class SettingsMenuProps
 {
-    BkgLabelW = 460,
-    BkgLabelH = 507,
-    BkgLabelX = ((int)MainWindowProps::windowSizeW - BkgLabelW) / 2,
-    BkgLabelY = ((int)MainWindowProps::windowSizeH - BkgLabelH) / 2,
+    BgLabelW = 460,
+    BgLabelH = 507,
+    BgLabelX = ((int)MainWindowProps::windowSizeW - BgLabelW) / 2,
+    BgLabelY = ((int)MainWindowProps::windowSizeH - BgLabelH) / 2,
 
-    BoardLabelX = BkgLabelX + 10,
-    BoardLabelY = BkgLabelY + 10,
-    BoardLabelW = BkgLabelW - 20,
+    BoardLabelX = BgLabelX + 10,
+    BoardLabelY = BgLabelY + 10,
+    BoardLabelW = BgLabelW - 20,
     BoardLabelH = 137,
 
-    BkgImageTextLabelX = BoardLabelX,
-    BkgImageTextLabelY = BoardLabelY + BoardLabelH + 13,
-    BkgImageTextLabelW = BoardLabelW / 2,
-    BkgImageTextLabelH = 30,
+    BgImageTextLabelX = BoardLabelX,
+    BgImageTextLabelY = BoardLabelY + BoardLabelH + 13,
+    BgImageTextLabelW = BoardLabelW / 2,
+    BgImageTextLabelH = 30,
 
-    BkgImageComboBoxX = BoardLabelX + (BoardLabelW / 2),
-    BkgImageComboBoxY = BkgImageTextLabelY,
-    BkgImageComboBoxW = BkgImageTextLabelW,
-    BkgImageComboBoxH = BkgImageTextLabelH,
+    BgImageComboBoxX = BoardLabelX + (BoardLabelW / 2),
+    BgImageComboBoxY = BgImageTextLabelY,
+    BgImageComboBoxW = BgImageTextLabelW,
+    BgImageComboBoxH = BgImageTextLabelH,
 
-    PieceSetTextLabelX = BkgImageTextLabelX,
-    PieceSetTextLabelY = BkgImageTextLabelY + BkgImageTextLabelH + 15,
-    PieceSetTextLabelW = BkgImageTextLabelW,
-    PieceSetTextLabelH = BkgImageTextLabelH,
+    PieceSetTextLabelX = BgImageTextLabelX,
+    PieceSetTextLabelY = BgImageTextLabelY + BgImageTextLabelH + 15,
+    PieceSetTextLabelW = BgImageTextLabelW,
+    PieceSetTextLabelH = BgImageTextLabelH,
 
-    PieceSetComboBoxX = BkgImageComboBoxX,
+    PieceSetComboBoxX = BgImageComboBoxX,
     PieceSetComboBoxY = PieceSetTextLabelY,
-    PieceSetComboBoxW = BkgImageComboBoxW,
-    PieceSetComboBoxH = BkgImageComboBoxH,
+    PieceSetComboBoxW = BgImageComboBoxW,
+    PieceSetComboBoxH = BgImageComboBoxH,
 
-    BoardTextLabelX = BkgImageTextLabelX,
+    BoardTextLabelX = BgImageTextLabelX,
     BoardTextLabelY = PieceSetTextLabelY + PieceSetTextLabelH + 15,
-    BoardTextLabelW = BkgImageTextLabelW,
-    BoardTextLabelH = BkgImageTextLabelH,
+    BoardTextLabelW = BgImageTextLabelW,
+    BoardTextLabelH = BgImageTextLabelH,
 
-    BoardComboBoxX = BkgImageComboBoxX,
+    BoardComboBoxX = BgImageComboBoxX,
     BoardComboBoxY = BoardTextLabelY,
-    BoardComboBoxW = BkgImageComboBoxW,
-    BoardComboBoxH = BkgImageComboBoxH,
+    BoardComboBoxW = BgImageComboBoxW,
+    BoardComboBoxH = BgImageComboBoxH,
 
-    LanguageTextLabelX = BkgImageTextLabelX,
+    LanguageTextLabelX = BgImageTextLabelX,
     LanguageTextLabelY = BoardTextLabelY + BoardTextLabelH + 15,
-    LanguageTextLabelW = BkgImageTextLabelW,
-    LanguageTextLabelH = BkgImageTextLabelH,
+    LanguageTextLabelW = BgImageTextLabelW,
+    LanguageTextLabelH = BgImageTextLabelH,
 
-    LanguageComboBoxX = BkgImageComboBoxX,
+    LanguageComboBoxX = BgImageComboBoxX,
     LanguageComboBoxY = LanguageTextLabelY,
-    LanguageComboBoxW = BkgImageComboBoxW,
-    LanguageComboBoxH = BkgImageComboBoxH,
+    LanguageComboBoxW = BgImageComboBoxW,
+    LanguageComboBoxH = BgImageComboBoxH,
 
-    SoundTextLabelX = BkgImageTextLabelX,
+    SoundTextLabelX = BgImageTextLabelX,
     SoundTextLabelY = LanguageTextLabelY + LanguageTextLabelH + 15,
-    SoundTextLabelW = BkgImageTextLabelW,
-    SoundTextLabelH = BkgImageTextLabelH,
+    SoundTextLabelW = BgImageTextLabelW,
+    SoundTextLabelH = BgImageTextLabelH,
 
-    SoundToggleSwitchX = BkgImageComboBoxX + 162,
+    SoundToggleSwitchX = BgImageComboBoxX + 162,
     SoundToggleSwitchY = SoundTextLabelY - 4,
 
-    ThemeTextLabelX = BkgImageTextLabelX,
+    ThemeTextLabelX = BgImageTextLabelX,
     ThemeTextLabelY = SoundTextLabelY + SoundTextLabelH + 15,
-    ThemeTextLabelW = BkgImageTextLabelW,
-    ThemeTextLabelH = BkgImageTextLabelH,
+    ThemeTextLabelW = BgImageTextLabelW,
+    ThemeTextLabelH = BgImageTextLabelH,
     ThemeToggleSwitchX = SoundToggleSwitchX,
     ThemeToggleSwitchY = ThemeTextLabelY - 4,
 
-    ButtonsBkgLabelX = BkgLabelX,
-    ButtonsBkgLabelY = ThemeTextLabelY + ThemeTextLabelH + 15,
-    ButtonsBkgLabelW = BkgLabelW,
-    ButtonsBkgLabelH = 80,
+    ButtonsBgLabelX = BgLabelX,
+    ButtonsBgLabelY = ThemeTextLabelY + ThemeTextLabelH + 15,
+    ButtonsBgLabelW = BgLabelW,
+    ButtonsBgLabelH = 80,
 
-    CancelButtonX = ButtonsBkgLabelX + 16,
-    CancelButtonY = ButtonsBkgLabelY + 15,
-    CancelButtonW = (BkgLabelW - 50) / 2,
-    CancelButtonH = ButtonsBkgLabelH - 30,
+    CancelButtonX = ButtonsBgLabelX + 16,
+    CancelButtonY = ButtonsBgLabelY + 15,
+    CancelButtonW = (BgLabelW - 50) / 2,
+    CancelButtonH = ButtonsBgLabelH - 30,
 
     SaveButtonX = CancelButtonX + CancelButtonW + 18,
     SaveButtonY = CancelButtonY,
@@ -245,12 +257,6 @@ enum class SettingsMenuProps
     HideAndShowButtonH = 40,
     HideAndShowButtonX = (int)MainWindowProps::windowSizeW - HideAndShowButtonW - 15,
     HideAndShowButtonY = (int)MainWindowProps::windowSizeH - HideAndShowButtonH - 15
-};
-
-enum class SettingsMenuPushButtons
-{
-    CancelButton = 1,
-    SaveButton = 2,
 };
 
 enum class BgImages
@@ -420,16 +426,14 @@ namespace LanguagesStr
     extern QString English;
 }
 
-namespace GameVariants
+struct SettingsData
 {
-    extern QString Standard;
-    extern QString Chess960;
-    extern QString KingOfTheHill;
-    extern QString ThreeCheck;
-    extern QString Horde;
-    extern QString FromPosition;
-    extern QString HordeSymbolsVector2D;
-    extern QString StandardSymbolsVector2D;
-}
+    BgImages   bgImage;
+    PieceSets  pieceSet;
+    Boards     board;
+    Languages  language;
+    bool       isSoundOn;
+    bool       isDarkTheme;
+};
 
 #endif // MENUS_HELPERS_HPP

@@ -20,7 +20,7 @@ namespace ImagesPaths
     QString SettingsPiecesSetsPath = SettingsPath + "pieces_sets/";
 
     // Background images
-    QString backgroundsPath = ImagesPath + "backgrounds/";
+    QString BackgroundsPath = ImagesPath + "backgrounds/";
     QString LightThemeGameBkg = "light_theme_game_bkg";
     QString DarkThemeGameBkg = "dark_theme_game_bkg";
 

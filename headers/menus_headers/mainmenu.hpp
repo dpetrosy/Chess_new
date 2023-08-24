@@ -15,7 +15,7 @@ class MainMenu : public QWidget
     Q_OBJECT
 
 public:
-    explicit MainMenu(MainWindow *mainWindow);
+    explicit MainMenu(MainWindow* mainWindow);
     virtual ~MainMenu();
 
     void makeMenuBeforeSwitch(MainWindow* mainWindow);

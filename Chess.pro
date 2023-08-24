@@ -17,6 +17,8 @@ SOURCES += \
     sources/mainwindow.cpp \
     sources/menus_sources/mainmenu.cpp \
     sources/menus_sources/menus_helpers.cpp \
+    sources/menus_sources/settingsmenu.cpp \
+    sources/menus_sources/toggleswitch.cpp \
     sources/paths.cpp \
     sources/utils.cpp
 
@@ -30,6 +32,9 @@ HEADERS += \
     headers/mainwindow.hpp \
     headers/menus_headers/mainmenu.hpp \
     headers/menus_headers/menus_helpers.hpp \
+    headers/menus_headers/settingsmenu.hpp \
+    headers/menus_headers/toggle_switch.hpp \
+    headers/menus_headers/toggle_switch_style.hpp \
     headers/paths.hpp \
     headers/predefined_classes.hpp \
     headers/utils.hpp

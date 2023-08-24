@@ -24,8 +24,8 @@ namespace ImagesPaths
 
     // Background images
     extern QString BackgroundsPath;
-    extern QString LightThemeGameBkg;
-    extern QString DarkThemeGameBkg;
+    extern QString LightThemeGameBg;
+    extern QString DarkThemeGameBg;
 
     // Boards images
     extern QString BoardsPath;
@@ -134,8 +134,8 @@ namespace StylesPaths
 
     // General for menus
     extern QString MenusStylesPath;
-    extern QString lightThemeBkgLabelStyle;
-    extern QString darkThemeBkgLabelStyle;
+    extern QString lightThemeBgLabelStyle;
+    extern QString darkThemeBgLabelStyle;
     extern QString lightTextStyle;
     extern QString darkTextStyle;
     extern QString lightBoldTextStyle;
@@ -167,8 +167,8 @@ namespace StylesPaths
     extern QString PVPMenuStylesPath;
     extern QString lightTopTextStyle;
     extern QString darkTopTextStyle;
-    extern QString lightTimeControlBkgLabelStyle;
-    extern QString darkTimeControlBkgLabelStyle;
+    extern QString lightTimeControlBgLabelStyle;
+    extern QString darkTimeControlBgLabelStyle;
     extern QString lightQuickGamesTextStyle;
     extern QString darkQuickGamesTextStyle;
     extern QString lightQuickGamesButtonStyle;

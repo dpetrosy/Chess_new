@@ -20,7 +20,7 @@ public:
     virtual ~MainWindow();
 
 public:
-    void             setBackgroundImage(QString& image);
+    void             setBackgroundImage(const QString& image);
     void             showQuitWindow();
 
     // Getters
@@ -58,12 +58,12 @@ private:
     QPixmap         _backgroundImage;
     QPalette        _palette;
 
+    DataCollector*  _dataCollector;
+
     // Menus Widgets
     MainMenu*       _MainMenuWidget;
     //PVPMenu*        _PVPMenuWidget;
     //SettingsMenu*   _SettingsMenuWidget;
-
-    // Menus StackedWidget
     QStackedWidget* _MenusStackedWidget;
 
     // Chess game Widgets

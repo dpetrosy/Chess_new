@@ -17,7 +17,7 @@ MainWindow::MainWindow()
     // Init class members
     init();
 
-    setBackgroundImage(DataCollector::GetInstance()->getBgImageStr());
+    setBackgroundImage(_dataCollector->getBgImageStr());
 
     // Make StackedWidget
     makeMenusStackedWidget();
@@ -29,6 +29,8 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
+    delete _dataCollector;
+
     // Menus Widgets
     delete _MainMenuWidget;
     //delete _PVPMenuWidget;
@@ -53,10 +55,10 @@ MainWindow *MainWindow::GetInstance()
 }
 
 // Public functions
-void MainWindow::setBackgroundImage(QString& image)
+void MainWindow::setBackgroundImage(const QString& image)
 {
-    image = replaceSpaceInString(image);
-    _backgroundImage.load(ImagesPaths::backgroundsPath + image + BgImagesStr::Extencion);
+    QString imageName = replaceSpaceInString(image);
+    _backgroundImage.load(ImagesPaths::BackgroundsPath + imageName + BgImagesStr::Extencion);
     _backgroundImage = _backgroundImage.scaled(this->size(), Qt::IgnoreAspectRatio);
     _palette.setBrush(QPalette::Window, _backgroundImage);
     this->setPalette(_palette);
@@ -64,8 +66,7 @@ void MainWindow::setBackgroundImage(QString& image)
 
 void MainWindow::showQuitWindow()
 {
-    auto dataCollector = DataCollector::GetInstance();
-    auto language = dataCollector->getLanguage();
+    auto language = _dataCollector->getLanguage();
 
     if (language == Languages::Armenian)
     {
@@ -98,6 +99,8 @@ QStackedWidget* MainWindow::getStackedWidget()
 // Private functions
 void MainWindow::init()
 {
+    _dataCollector = DataCollector::GetInstance();
+
     // Menus Widgets
     _MainMenuWidget = new MainMenu(this);
     //_PVPMenuWidget = new PVPMenu();

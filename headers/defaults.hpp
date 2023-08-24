@@ -7,8 +7,8 @@
 
 namespace DefaultData
 {
-    extern BgImages  BgImage;
-    extern QString   BgImageStr;
+    extern BgImages   BgImage;
+    extern QString    BgImageStr;
 
     extern Languages  Language;
     extern QString    LanguageStr;
@@ -19,8 +19,8 @@ namespace DefaultData
     extern Boards     Board;
     extern QString    BoardStr;
 
-    extern bool isSoundOn;
-    extern bool isDarkTheme;
+    extern bool       isSoundOn;
+    extern bool       isDarkTheme;
 }
 
 #endif // DEFAULTS_HPP

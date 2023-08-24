@@ -14,5 +14,6 @@ class StartGameButton;
 class PawnPromDialog;
 class ToggleSwitch;
 class QuickGameButton;
+struct SettingsData;
 
 #endif // PREDEFINED_CLASSES_HPP

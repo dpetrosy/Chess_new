@@ -23,7 +23,7 @@ void setLabelTextFont(QLabel* label, int font)
     label->setFont(buttonFont);
 }
 
-void setStyleSheet(QWidget* obj, QString path)
+void setStyleSheet(QWidget* obj, const QString& path)
 {
     QFile file;
     file.setFileName(path);
@@ -33,7 +33,7 @@ void setStyleSheet(QWidget* obj, QString path)
     file.close();
 }
 
-void setStyleSheetByTheme(QWidget* obj, QString lightStylePath, QString darkStylePath, bool isDarkTheme)
+void setStyleSheetByTheme(QWidget* obj, const QString& lightStylePath, const QString& darkStylePath, bool isDarkTheme)
 {
     QString path;
 
@@ -45,12 +45,19 @@ void setStyleSheetByTheme(QWidget* obj, QString lightStylePath, QString darkStyl
     setStyleSheet(obj, path);
 }
 
-QString replaceSpaceInString(QString str)
+QString replaceSpaceInString(const QString& str)
 {
+    QString temp;
+
     for (auto it = str.begin(); it != str.end(); ++it)
+    {
         if (*it == ' ')
-            *it = '_';
-    return str;
+            temp += '_';
+        else
+            temp += *it;
+    }
+
+    return temp;
 }
 
 

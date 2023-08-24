@@ -9,9 +9,9 @@
 void     setPushButtonSize(QPushButton *button, int width, int height);
 void     setPushButtonFont(QPushButton *button, int font);
 void     setLabelTextFont(QLabel* label, int font);
-void     setStyleSheet(QWidget* obj, QString path);
-void     setStyleSheetByTheme(QWidget* obj, QString lightStylePath, QString darkStylePath, bool isDarkTheme);
-QString  replaceSpaceInString(QString str);
+void     setStyleSheet(QWidget* obj, const QString& path);
+void     setStyleSheetByTheme(QWidget* obj, const QString& lightStylePath, const QString& darkStylePath, bool isDarkTheme);
+QString  replaceSpaceInString(const QString& str);
 
 
 //void     setQLabelPictureByTheme(QLabel* label, bool isDarkTheme, QString lightThemePicturePath, QString darkThemePicturePath);
