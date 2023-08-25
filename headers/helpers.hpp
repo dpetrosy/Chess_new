@@ -12,9 +12,6 @@ enum class MainWindowProps : int
 enum class Menus : int
 {
     MainMenu,
-    PVPMenu,
-    PVCMenu,
-    InstructionsMenu,
     SettingsMenu,
     QuitMenu,
     GameWidget,

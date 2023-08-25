@@ -35,7 +35,7 @@ void MainMenu::makeMenuBeforeSwitch(MainWindow* mainWindow)
     auto language = dataCollector->getLanguage();
 
     // Set bkg image
-    mainWindow->setBackgroundImage(dataCollector->getBgImageStr());
+    mainWindow->setBackgroundImage(dataCollector->getBgImage());
 
     if (language == Languages::Armenian)
     {
@@ -133,9 +133,9 @@ void MainMenu::makeMainMenu(MainWindow* mainWindow)
     _versionTextLabel->setText("Version: 1.2.4");
 
     // Make connects
-    connect(_PVPButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::PVPMenu));
-    connect(_PVCButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::PVCMenu));
-    connect(_InstrButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::InstructionsMenu));
+    //connect(_PVPButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::PVPMenu));
+    //connect(_PVCButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::PVCMenu));
+    //connect(_InstrButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::InstructionsMenu));
     connect(_SettingsButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::SettingsMenu));
     connect(_QuitButton, &QPushButton::clicked, mainWindow, std::bind(switchMenu, mainWindow, Menus::QuitMenu));
 }

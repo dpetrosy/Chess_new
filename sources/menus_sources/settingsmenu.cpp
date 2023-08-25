@@ -4,21 +4,23 @@
 #include "mainwindow.hpp"
 #include "toggle_switch.hpp"
 #include "data_collector.hpp"
-//#include "gamewidget.hpp"
+#include "defaults.hpp"
 #include "paths.hpp"
 #include "utils.hpp"
 
-SettingsMenu::SettingsMenu(MainWindow* mainWindow)
+SettingsMenu::SettingsMenu()
 {
     // Init class members
     init();
 
     // Make SettingsMenu
-    makeSettingsMenu(mainWindow);
+    makeSettingsMenu();
 }
 
 SettingsMenu::~SettingsMenu()
 {
+    delete _tempData;
+
     delete _bgLabel;
     delete _boardLabel;
     delete _piecesLabel;
@@ -106,544 +108,535 @@ void SettingsMenu::initSettingsData()
 {
     auto dataCollector = DataCollector::GetInstance();
 
-    _tempData.bgImage = dataCollector->getBgImage();
-    _tempData.board = dataCollector->getBoard();
-    _tempData.pieceSet = dataCollector->getPieceSet();
-    _tempData.language = dataCollector->getLanguage();
-    _tempData.isSoundOn = dataCollector->isSoundOn();
-    _tempData.isDarkTheme = dataCollector->isDarkTheme();
+    _tempData = new SettingsData();
+    _tempData->bgImage = dataCollector->getBgImage();
+    _tempData->board = dataCollector->getBoard();
+    _tempData->pieceSet = dataCollector->getPieceSet();
+    _tempData->language = dataCollector->getLanguage();
+    _tempData->isSoundOn = dataCollector->isSoundOn();
+    _tempData->isDarkTheme = dataCollector->isDarkTheme();
 }
 
-//// Public slots
-//void SettingsMenu::cancelButtonClicked()
-//{
-//    _tempData = _settingsData;
-//    globalIsDarkTheme = _settingsData.isDarkTheme;
-//    globalPieceSetPath = ImagesPaths::piecesPath + _settingsData.piecesSetStr + "/";
-//    gLanguage = _settingsData.languageStr;
-//    gSound = _settingsData.isSoundAvailable;
+// Public slots
+void SettingsMenu::cancelButtonClicked()
+{
+    auto dataCollector = DataCollector::GetInstance();
+    dataCollector->resetTempData(_tempData);
 
-//    auto mainWindow = MainWindow::GetInstance();
-//    mainWindow->setBackgroundImage(_settingsData.bkgImageStr);
-//    mainWindow->switchMenu(Menus::MainMenu);
-//}
+    auto mainWindow = MainWindow::GetInstance();
+    mainWindow->setBackgroundImage(_tempData->bgImage);
+    switchMenu(mainWindow, Menus::MainMenu);
+}
 
-//void SettingsMenu::saveButtonClicked()
-//{
-//    _settingsData = _tempData;
-//    globalIsDarkTheme = _settingsData.isDarkTheme;
-//    globalPieceSetPath = ImagesPaths::piecesPath + _settingsData.piecesSetStr + "/";
-//    gLanguage = _settingsData.languageStr;
-//    gSound = _settingsData.isSoundAvailable;
+void SettingsMenu::saveButtonClicked()
+{
+    auto dataCollector = DataCollector::GetInstance();
+    dataCollector->saveTempData(_tempData);
 
-//    auto mainWindow = MainWindow::GetInstance();
-//    auto gameWidget = GameWidget::GetInstance();
+    auto mainWindow = MainWindow::GetInstance();
+    mainWindow->setBackgroundImage(_tempData->bgImage);
+    switchMenu(mainWindow, Menus::MainMenu);
+}
 
-//    mainWindow->setBackgroundImage(_settingsData.bkgImageStr);
-//    gameWidget->setPieceSet(_settingsData.piecesSetStr);
-//    gameWidget->setBoard(_settingsData.boardStr);
+// Public functions
+void SettingsMenu::makeMenuBeforeSwitch()
+{
+    QString image;
 
-//    mainWindow->switchMenu(Menus::MainMenu);
-//}
+    // Background image
+    _bgImageComboBox->setCurrentIndex((int)_tempData->bgImage);
 
-//// Public functions
-//bool SettingsMenu::getTheme()
-//{
-//    return _settingsData.isDarkTheme;
-//}
+    // Piece set
+    image = replaceSpaceInString(getPieceSetStrByNumber(_tempData->pieceSet));
+    _piecesLabel->setPixmap(QPixmap(ImagesPaths::SettingsPiecesSetsPath + image + PieceSetsStr::Extencion));
+    _pieceSetsComboBox->setCurrentIndex((int)_tempData->pieceSet);
 
-//QPushButton* SettingsMenu::getPushButton(SettingsMenuPushButtons button)
-//{
-//    switch (button)
-//    {
-//        case SettingsMenuPushButtons::CancelButton: return _cancelPushButton;
-//        case SettingsMenuPushButtons::SaveButton: return _savePushButton;
-//        default: return _cancelPushButton;
-//    }
-//}
+    // Board
+    image = replaceSpaceInString(getBoardStrByNumber(_tempData->board));
+    _boardLabel->setPixmap(QPixmap(ImagesPaths::SettingsBoardsPath + image + BoardsStr::Extencion));
+    _boardComboBox->setCurrentIndex((int)_tempData->board);
 
-//void SettingsMenu::makeMenuBeforeSwitch()
-//{
-//    // Background image
-//    _bgImageComboBox->setCurrentIndex(_settingsData.bkgImageNumber);
+    // Language
+    _languageComboBox->setCurrentIndex((int)_tempData->language);
 
-//    // Piece set
-//    _piecesLabel->setPixmap(QPixmap(ImagesPaths::settingsPiecesSetsPath + _settingsData.piecesSetStr + PieceSets::Extencion));
-//    _pieceSetsComboBox->setCurrentIndex(_settingsData.pieceSetNumber);
+    // Sound
+    _soundToggleSwitch->setChecked(_tempData->isSoundOn);
 
-//    // Board
-//    _boardLabel->setPixmap(QPixmap(ImagesPaths::settingsBoardsPath + _settingsData.boardStr + Boards::Extencion));
-//    _boardComboBox->setCurrentIndex(_settingsData.boardNumber);
+    // Theme
+    _themeToggleSwitch->setChecked(_tempData->isDarkTheme);
+    changeMenuTheme();
 
-//    // Language
-//    _languageComboBox->setCurrentIndex(_settingsData.languageNumber);
-
-//    // Sound
-//    _soundToggleSwitch->setChecked(_settingsData.isSoundAvailable);
-
-//    // Theme
-//    _themeToggleSwitch->setChecked(globalIsDarkTheme);
-//    changeMenuTheme();
-
-//    if (gLanguage == Languages::Armenian)
-//    {
-//        _bgImageTextLabel->setText("Ետնանկար");
-//        _pieceSetsTextLabel->setText("Խաղաքարեր");
-//        _boardTextLabel->setText("Խաղատախտակ");
-//        _languageTextLabel->setText("Լեզու");
-//        _soundTextLabel->setText("Ձայն");
-//        _themeTextLabel->setText("Սև ֆոն");
-//        _cancelPushButton->setText("Չեղարկել");
-//        _savePushButton->setText("Պահպանել");
-//        _hideAndShowButton->setText("Թաքցնել");
-//        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
-//    }
-//    else if (gLanguage == Languages::Russian)
-//    {
-//        _bgImageTextLabel->setText("Фоновое изображение");
-//        _pieceSetsTextLabel->setText("Фигуры");
-//        _boardTextLabel->setText("Доска");
-//        _languageTextLabel->setText("Язык");
-//        _soundTextLabel->setText("Включить звук");
-//        _themeTextLabel->setText("Чёрная тема");
-//        _cancelPushButton->setText("Отмена");
-//        _savePushButton->setText("Сохранить");
-//        _hideAndShowButton->setText("Скрыть");
-//        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 11, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 11, (int)SettingsMenuProps::HideAndShowButtonH);
-//    }
-//    else // English US
-//    {
-//        _bgImageTextLabel->setText("Background Image");
-//        _pieceSetsTextLabel->setText("Piece Set");
-//        _boardTextLabel->setText("Board");
-//        _languageTextLabel->setText("Language");
-//        _soundTextLabel->setText("Play Sounds");
-//        _themeTextLabel->setText("Dark Theme");
-//        _cancelPushButton->setText("Cancel");
-//        _savePushButton->setText("Save");
-//        _hideAndShowButton->setText("Hide");
-//        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
-//    }
-//}
+    if (_tempData->language == Languages::Armenian)
+    {
+        _bgImageTextLabel->setText("Ետնանկար");
+        _pieceSetsTextLabel->setText("Խաղաքարեր");
+        _boardTextLabel->setText("Խաղատախտակ");
+        _languageTextLabel->setText("Լեզու");
+        _soundTextLabel->setText("Ձայն");
+        _themeTextLabel->setText("Սև ֆոն");
+        _cancelPushButton->setText("Չեղարկել");
+        _savePushButton->setText("Պահպանել");
+        _hideAndShowButton->setText("Թաքցնել");
+        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY,
+                                       (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
+    }
+    else if (_tempData->language == Languages::Russian)
+    {
+        _bgImageTextLabel->setText("Фоновое изображение");
+        _pieceSetsTextLabel->setText("Фигуры");
+        _boardTextLabel->setText("Доска");
+        _languageTextLabel->setText("Язык");
+        _soundTextLabel->setText("Включить звук");
+        _themeTextLabel->setText("Чёрная тема");
+        _cancelPushButton->setText("Отмена");
+        _savePushButton->setText("Сохранить");
+        _hideAndShowButton->setText("Скрыть");
+        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 11, (int)SettingsMenuProps::HideAndShowButtonY,
+                                       (int)SettingsMenuProps::HideAndShowButtonW + 11, (int)SettingsMenuProps::HideAndShowButtonH);
+    }
+    else // English
+    {
+        _bgImageTextLabel->setText("Background Image");
+        _pieceSetsTextLabel->setText("Piece Set");
+        _boardTextLabel->setText("Board");
+        _languageTextLabel->setText("Language");
+        _soundTextLabel->setText("Play Sounds");
+        _themeTextLabel->setText("Dark Theme");
+        _cancelPushButton->setText("Cancel");
+        _savePushButton->setText("Save");
+        _hideAndShowButton->setText("Hide");
+        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY,
+                                       (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
+    }
+}
 
 // Private functions
-void SettingsMenu::makeSettingsMenu(MainWindow* mainWindow)
+void SettingsMenu::makeSettingsMenu()
 {
     // Background label
-    ::setStyleSheetByTheme(_bgLabel, StylesPaths::lightThemeBgLabelStyle, StylesPaths::darkThemeBgLabelStyle, _tempData.isDarkTheme);
+    setStyleSheetByTheme(_bgLabel, StylesPaths::lightThemeBgLabelStyle, StylesPaths::darkThemeBgLabelStyle, _tempData->isDarkTheme);
     _bgLabel->setGeometry((int)SettingsMenuProps::BgLabelX, (int)SettingsMenuProps::BgLabelY, (int)SettingsMenuProps::BgLabelW, (int)SettingsMenuProps::BgLabelH);
 
     // Board label
-    _boardLabel->setPixmap(QPixmap(ImagesPaths::SettingsBoardsPath + "board" + _tempData. + ".png"));
+    _boardLabel->setPixmap(QPixmap(ImagesPaths::SettingsBoardsPath + DefaultData::BoardStr + BoardsStr::Extencion));
     _boardLabel->move((int)SettingsMenuProps::BoardLabelX, (int)SettingsMenuProps::BoardLabelY);
 
     // Pieces label
-    _piecesLabel->setPixmap(QPixmap(ImagesPaths::settingsPiecesSetsPath + PieceSets::Cburnett + ".png"));
+    _piecesLabel->setPixmap(QPixmap(ImagesPaths::SettingsPiecesSetsPath + DefaultData::PieceSetStr + PieceSetsStr::Extencion));
     _piecesLabel->move((int)SettingsMenuProps::BoardLabelX, (int)SettingsMenuProps::BoardLabelY);
 
     // Text for background image
-    _bgImageTextLabel->setGeometry((int)SettingsMenuProps::BkgImageTextLabelX, (int)SettingsMenuProps::BkgImageTextLabelY, (int)SettingsMenuProps::BkgImageTextLabelW, (int)SettingsMenuProps::BkgImageTextLabelH);
+    _bgImageTextLabel->setGeometry((int)SettingsMenuProps::BgImageTextLabelX, (int)SettingsMenuProps::BgImageTextLabelY,
+                                  (int)SettingsMenuProps::BgImageTextLabelW, (int)SettingsMenuProps::BgImageTextLabelH);
+    setStyleSheetByTheme(_bgImageTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
     _bgImageTextLabel->setText("Background Image");
-    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _bgImageTextLabel, _settingsData.isDarkTheme);
 
     // Background image combobox
-    _bgImageComboBox->setGeometry((int)SettingsMenuProps::BkgImageComboBoxX, (int)SettingsMenuProps::BkgImageComboBoxY, (int)SettingsMenuProps::BkgImageComboBoxW, (int)SettingsMenuProps::BkgImageComboBoxH);
-    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _bgImageComboBox, _settingsData.isDarkTheme);
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::AngelView));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::Blacked));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::BravePawn));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::Checkmate));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::Dark_Chess));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::Emperors));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::FaceToFace));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::IAmTheKing));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::Landscape));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::Legends));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::Shadow));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::StrongKnight));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::TheBishop));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::TheKing));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::TheKnight));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::TheQueen));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::TheRook));
-    _bgImageComboBox->addItem(removeUnderscoreInString(BackgroundImages::TopView));
-    _bgImageComboBox->setCurrentIndex((int)BackgroundImagesNumbers::TheRook);
-    connect(_bgImageComboBox, &QComboBox::currentIndexChanged, this, &SettingsMenu::bkgImageComboBoxIndexChanged);
+    _bgImageComboBox->setGeometry((int)SettingsMenuProps::BgImageComboBoxX, (int)SettingsMenuProps::BgImageComboBoxY,
+                                 (int)SettingsMenuProps::BgImageComboBoxW, (int)SettingsMenuProps::BgImageComboBoxH);
+    setStyleSheetByTheme(_bgImageComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
+    _bgImageComboBox->addItem(BgImagesStr::AngelView);
+    _bgImageComboBox->addItem(BgImagesStr::Blacked);
+    _bgImageComboBox->addItem(BgImagesStr::BravePawn);
+    _bgImageComboBox->addItem(BgImagesStr::Checkmate);
+    _bgImageComboBox->addItem(BgImagesStr::Dark_Chess);
+    _bgImageComboBox->addItem(BgImagesStr::Emperors);
+    _bgImageComboBox->addItem(BgImagesStr::FaceToFace);
+    _bgImageComboBox->addItem(BgImagesStr::IAmTheKing);
+    _bgImageComboBox->addItem(BgImagesStr::Landscape);
+    _bgImageComboBox->addItem(BgImagesStr::Legends);
+    _bgImageComboBox->addItem(BgImagesStr::Shadow);
+    _bgImageComboBox->addItem(BgImagesStr::StrongKnight);
+    _bgImageComboBox->addItem(BgImagesStr::TheBishop);
+    _bgImageComboBox->addItem(BgImagesStr::TheKing);
+    _bgImageComboBox->addItem(BgImagesStr::TheKnight);
+    _bgImageComboBox->addItem(BgImagesStr::TheQueen);
+    _bgImageComboBox->addItem(BgImagesStr::TheRook);
+    _bgImageComboBox->addItem(BgImagesStr::TopView);
+    _bgImageComboBox->setCurrentIndex((int)_tempData->bgImage);
+    connect(_bgImageComboBox, &QComboBox::currentIndexChanged, this, &SettingsMenu::bgImageComboBoxIndexChanged);
 
     // Text for piece sets
-    _pieceSetsTextLabel->setGeometry((int)SettingsMenuProps::PieceSetTextLabelX, (int)SettingsMenuProps::PieceSetTextLabelY, (int)SettingsMenuProps::PieceSetTextLabelW, (int)SettingsMenuProps::PieceSetTextLabelH);
+    _pieceSetsTextLabel->setGeometry((int)SettingsMenuProps::PieceSetTextLabelX, (int)SettingsMenuProps::PieceSetTextLabelY,
+                                    (int)SettingsMenuProps::PieceSetTextLabelW, (int)SettingsMenuProps::PieceSetTextLabelH);
+    setStyleSheetByTheme(_pieceSetsTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
     _pieceSetsTextLabel->setText("Piece Set");
-    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _pieceSetsTextLabel, _settingsData.isDarkTheme);
 
     // Piece sets combobox
-    _pieceSetsComboBox->setGeometry((int)SettingsMenuProps::PieceSetComboBoxX, (int)SettingsMenuProps::PieceSetComboBoxY, (int)SettingsMenuProps::PieceSetComboBoxW, (int)SettingsMenuProps::PieceSetComboBoxH);
-    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _pieceSetsComboBox, _settingsData.isDarkTheme);
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Alpha));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::California));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Cardinal));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Cases));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Cburnett));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Chess7));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Condal));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Fresca));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::GameRoom));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Glass));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::ICPieces));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Lolz));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Maestro));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Merida));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Neo));
-    _pieceSetsComboBox->addItem(removeUnderscoreInString(PieceSets::Ocean));
-    _pieceSetsComboBox->setCurrentIndex((int)PieceSetsNumber::Cburnett);
+    _pieceSetsComboBox->setGeometry((int)SettingsMenuProps::PieceSetComboBoxX, (int)SettingsMenuProps::PieceSetComboBoxY,
+                                   (int)SettingsMenuProps::PieceSetComboBoxW, (int)SettingsMenuProps::PieceSetComboBoxH);
+    setStyleSheetByTheme(_pieceSetsComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Alpha);
+    _pieceSetsComboBox->addItem(PieceSetsStr::California);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Cardinal);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Cases);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Cburnett);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Chess7);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Condal);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Fresca);
+    _pieceSetsComboBox->addItem(PieceSetsStr::GameRoom);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Glass);
+    _pieceSetsComboBox->addItem(PieceSetsStr::ICPieces);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Lolz);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Maestro);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Merida);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Neo);
+    _pieceSetsComboBox->addItem(PieceSetsStr::Ocean);
+    _pieceSetsComboBox->setCurrentIndex((int)_tempData->pieceSet);
     connect(_pieceSetsComboBox, &QComboBox::currentIndexChanged, this, &SettingsMenu::pieceSetsComboBoxIndexChanged);
 
     // Text for board
-    _boardTextLabel->setGeometry((int)SettingsMenuProps::BoardTextLabelX, (int)SettingsMenuProps::BoardTextLabelY, (int)SettingsMenuProps::BoardTextLabelW, (int)SettingsMenuProps::BoardTextLabelH);
+    _boardTextLabel->setGeometry((int)SettingsMenuProps::BoardTextLabelX, (int)SettingsMenuProps::BoardTextLabelY,
+                                (int)SettingsMenuProps::BoardTextLabelW, (int)SettingsMenuProps::BoardTextLabelH);
+    setStyleSheetByTheme(_boardTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
     _boardTextLabel->setText("Board");
-    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _boardTextLabel, _settingsData.isDarkTheme);
 
     // Board combobox
-    _boardComboBox->setGeometry((int)SettingsMenuProps::BoardComboBoxX, (int)SettingsMenuProps::BoardComboBoxY, (int)SettingsMenuProps::BoardComboBoxW, (int)SettingsMenuProps::BoardComboBoxH);
-    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _boardComboBox, _settingsData.isDarkTheme);
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Bit8));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Bases));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Blue));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Brown));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Bubblegum));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::BurledWood));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::DarkWood));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Dash));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Glass));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Graffiti));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Green));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::IcySea));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Light));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Lolz));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Marble));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Metal));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Neon));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Newspaper));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Orange));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Parchment));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Purple));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Red));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Sand));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Sky));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Stone));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Tan));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Tournament));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Translucent));
-    _boardComboBox->addItem(removeUnderscoreInString(Boards::Walnut));
-    _boardComboBox->setCurrentIndex((int)BoardsNumber::Brown);
+    _boardComboBox->setGeometry((int)SettingsMenuProps::BoardComboBoxX, (int)SettingsMenuProps::BoardComboBoxY,
+                               (int)SettingsMenuProps::BoardComboBoxW, (int)SettingsMenuProps::BoardComboBoxH);
+    setStyleSheetByTheme(_boardComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
+    _boardComboBox->addItem(BoardsStr::Bit8);
+    _boardComboBox->addItem(BoardsStr::Bases);
+    _boardComboBox->addItem(BoardsStr::Blue);
+    _boardComboBox->addItem(BoardsStr::Brown);
+    _boardComboBox->addItem(BoardsStr::Bubblegum);
+    _boardComboBox->addItem(BoardsStr::BurledWood);
+    _boardComboBox->addItem(BoardsStr::DarkWood);
+    _boardComboBox->addItem(BoardsStr::Dash);
+    _boardComboBox->addItem(BoardsStr::Glass);
+    _boardComboBox->addItem(BoardsStr::Graffiti);
+    _boardComboBox->addItem(BoardsStr::Green);
+    _boardComboBox->addItem(BoardsStr::IcySea);
+    _boardComboBox->addItem(BoardsStr::Light);
+    _boardComboBox->addItem(BoardsStr::Lolz);
+    _boardComboBox->addItem(BoardsStr::Marble);
+    _boardComboBox->addItem(BoardsStr::Metal);
+    _boardComboBox->addItem(BoardsStr::Neon);
+    _boardComboBox->addItem(BoardsStr::Newspaper);
+    _boardComboBox->addItem(BoardsStr::Orange);
+    _boardComboBox->addItem(BoardsStr::Parchment);
+    _boardComboBox->addItem(BoardsStr::Purple);
+    _boardComboBox->addItem(BoardsStr::Red);
+    _boardComboBox->addItem(BoardsStr::Sand);
+    _boardComboBox->addItem(BoardsStr::Sky);
+    _boardComboBox->addItem(BoardsStr::Stone);
+    _boardComboBox->addItem(BoardsStr::Tan);
+    _boardComboBox->addItem(BoardsStr::Tournament);
+    _boardComboBox->addItem(BoardsStr::Translucent);
+    _boardComboBox->addItem(BoardsStr::Walnut);
+    _boardComboBox->setCurrentIndex((int)_tempData->board);
     connect(_boardComboBox, &QComboBox::currentIndexChanged, this, &SettingsMenu::boardComboBoxIndexChanged);
 
+
     // Text for language
-    _languageTextLabel->setGeometry((int)SettingsMenuProps::LanguageTextLabelX, (int)SettingsMenuProps::LanguageTextLabelY, (int)SettingsMenuProps::LanguageTextLabelW, (int)SettingsMenuProps::LanguageTextLabelH);
+    _languageTextLabel->setGeometry((int)SettingsMenuProps::LanguageTextLabelX, (int)SettingsMenuProps::LanguageTextLabelY,
+                                   (int)SettingsMenuProps::LanguageTextLabelW, (int)SettingsMenuProps::LanguageTextLabelH);
+    setStyleSheetByTheme(_languageTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
     _languageTextLabel->setText("Language");
-    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _languageTextLabel, _settingsData.isDarkTheme);
 
     // Language combobox
-    _languageComboBox->setGeometry((int)SettingsMenuProps::LanguageComboBoxX, (int)SettingsMenuProps::LanguageComboBoxY, (int)SettingsMenuProps::LanguageComboBoxW, (int)SettingsMenuProps::LanguageComboBoxH);
-    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _languageComboBox, _settingsData.isDarkTheme);
-    _languageComboBox->addItem(Languages::Armenian);
-    _languageComboBox->addItem(Languages::Russian);
-    _languageComboBox->addItem(Languages::English);
-    _languageComboBox->setCurrentIndex(2);
+    _languageComboBox->setGeometry((int)SettingsMenuProps::LanguageComboBoxX, (int)SettingsMenuProps::LanguageComboBoxY,
+                                  (int)SettingsMenuProps::LanguageComboBoxW, (int)SettingsMenuProps::LanguageComboBoxH);
+    setStyleSheetByTheme(_languageComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
+    _languageComboBox->addItem(LanguagesStr::Armenian);
+    _languageComboBox->addItem(LanguagesStr::Russian);
+    _languageComboBox->addItem(LanguagesStr::English);
+    _languageComboBox->setCurrentIndex((int)_tempData->language);
     connect(_languageComboBox, &QComboBox::currentIndexChanged, this, &SettingsMenu::languageComboBoxIndexChanged);
 
     // Text for sound
-    _soundTextLabel->setGeometry((int)SettingsMenuProps::SoundTextLabelX, (int)SettingsMenuProps::SoundTextLabelY, (int)SettingsMenuProps::SoundTextLabelW, (int)SettingsMenuProps::SoundTextLabelH);
+    _soundTextLabel->setGeometry((int)SettingsMenuProps::SoundTextLabelX, (int)SettingsMenuProps::SoundTextLabelY,
+                                (int)SettingsMenuProps::SoundTextLabelW, (int)SettingsMenuProps::SoundTextLabelH);
+    setStyleSheetByTheme(_soundTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
     _soundTextLabel->setText("Play Sounds");
-    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _soundTextLabel, _settingsData.isDarkTheme);
 
     // Sound toggle switch
     _soundToggleSwitch->move((int)SettingsMenuProps::SoundToggleSwitchX, (int)SettingsMenuProps::SoundToggleSwitchY);
-    _soundToggleSwitch->setChecked(gSound);
     connect(_soundToggleSwitch, &QCheckBox::clicked, this, &SettingsMenu::swapSound);
+    _soundToggleSwitch->setChecked(_tempData->isSoundOn);
 
     // Text for theme
-    _themeTextLabel->setGeometry((int)SettingsMenuProps::ThemeTextLabelX, (int)SettingsMenuProps::ThemeTextLabelY, (int)SettingsMenuProps::ThemeTextLabelW, (int)SettingsMenuProps::ThemeTextLabelH);
+    _themeTextLabel->setGeometry((int)SettingsMenuProps::ThemeTextLabelX, (int)SettingsMenuProps::ThemeTextLabelY,
+                                (int)SettingsMenuProps::ThemeTextLabelW, (int)SettingsMenuProps::ThemeTextLabelH);
+    setStyleSheetByTheme(_themeTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
     _themeTextLabel->setText("Dark theme");
-    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _themeTextLabel, _settingsData.isDarkTheme);
 
     // Theme toggle switch
     _themeToggleSwitch->move((int)SettingsMenuProps::ThemeToggleSwitchX, (int)SettingsMenuProps::ThemeToggleSwitchY);
-    _themeToggleSwitch->setChecked(_settingsData.isDarkTheme);
+    _themeToggleSwitch->setChecked(_tempData->isDarkTheme);
     connect(_themeToggleSwitch, &QCheckBox::clicked, this, &SettingsMenu::swapMenuTheme);
 
     // Buttons background label
-    ::setStyleSheetByTheme(StylesPaths::lightThemeButtonsLabelStyle, StylesPaths::darkThemeButtonsLabelStyle, _buttonsBgLabel, _settingsData.isDarkTheme);
-    _buttonsBgLabel->setGeometry((int)SettingsMenuProps::ButtonsBkgLabelX, (int)SettingsMenuProps::ButtonsBkgLabelY, (int)SettingsMenuProps::ButtonsBkgLabelW, (int)SettingsMenuProps::ButtonsBkgLabelH);
-
-    // Cancel push button
-    ::setStyleSheetByTheme(StylesPaths::settingsMenuLightCancelButtonStyle, StylesPaths::settingsMenuDarkCancelButtonStyle, _cancelPushButton, _settingsData.isDarkTheme);
-    _cancelPushButton->setText("Cancel");
-    _cancelPushButton->setGeometry((int)SettingsMenuProps::CancelButtonX, (int)SettingsMenuProps::CancelButtonY, (int)SettingsMenuProps::CancelButtonW, (int)SettingsMenuProps::CancelButtonH);
+    _buttonsBgLabel->setGeometry((int)SettingsMenuProps::ButtonsBgLabelX, (int)SettingsMenuProps::ButtonsBgLabelY,
+                                 (int)SettingsMenuProps::ButtonsBgLabelW, (int)SettingsMenuProps::ButtonsBgLabelH);
+    setStyleSheetByTheme(_buttonsBgLabel, StylesPaths::lightThemeButtonsLabelStyle, StylesPaths::darkThemeButtonsLabelStyle, _tempData->isDarkTheme);
 
     // Save push button
-    ::setStyleSheet(StylesPaths::settingsMenuSaveButtonStyle, _savePushButton);
+    _savePushButton->setGeometry((int)SettingsMenuProps::SaveButtonX, (int)SettingsMenuProps::SaveButtonY,
+                                 (int)SettingsMenuProps::SaveButtonW, (int)SettingsMenuProps::SaveButtonH);
+    ::setStyleSheet(_savePushButton, StylesPaths::settingsMenuSaveButtonStyle);
     _savePushButton->setText("Save");
-    _savePushButton->setGeometry((int)SettingsMenuProps::SaveButtonX, (int)SettingsMenuProps::SaveButtonY, (int)SettingsMenuProps::SaveButtonW, (int)SettingsMenuProps::SaveButtonH);
+    connect(_savePushButton, &QPushButton::clicked, this, &SettingsMenu::saveButtonClicked);
+
+    // Cancel push button
+    _cancelPushButton->setGeometry((int)SettingsMenuProps::CancelButtonX, (int)SettingsMenuProps::CancelButtonY,
+                                  (int)SettingsMenuProps::CancelButtonW, (int)SettingsMenuProps::CancelButtonH);
+    setStyleSheetByTheme(_cancelPushButton, StylesPaths::settingsMenuLightCancelButtonStyle, StylesPaths::settingsMenuDarkCancelButtonStyle, _tempData->isDarkTheme);
+    _cancelPushButton->setText("Cancel");
+    connect(_cancelPushButton, &QPushButton::clicked, this, &SettingsMenu::cancelButtonClicked);
 
     // Menu hide and show button
-    ::setStyleSheet(StylesPaths::hideAndShowButtonStyle, _hideAndShowButton);
-    _hideAndShowButton->setText("Hide");
-    _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
+    _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY,
+                                   (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
     connect(_hideAndShowButton, &QPushButton::clicked, this, &SettingsMenu::hideAndShowMenu);
+    ::setStyleSheet(_hideAndShowButton, StylesPaths::hideAndShowButtonStyle);
+    _hideAndShowButton->setText("Hide");
 }
 
-//void SettingsMenu::hideAndShowMenu()
-//{
-//    if (_isMenuVisible)
-//    {
-//        _bgLabel->hide();
-//        _boardLabel->hide();
-//        _piecesLabel->hide();
+void SettingsMenu::hideAndShowMenu()
+{
+    if (_isMenuVisible)
+    {
+        _isMenuVisible = false;
 
-//        // Background image
-//        _bgImageTextLabel->hide();
-//        _bgImageComboBox->hide();
+        _bgLabel->hide();
+        _boardLabel->hide();
+        _piecesLabel->hide();
 
-//        // Piece sets
-//        _pieceSetsTextLabel->hide();
-//        _pieceSetsComboBox->hide();
+        // Background image
+        _bgImageTextLabel->hide();
+        _bgImageComboBox->hide();
 
-//        // Board
-//        _boardTextLabel->hide();
-//        _boardComboBox->hide();
+        // Piece sets
+        _pieceSetsTextLabel->hide();
+        _pieceSetsComboBox->hide();
 
-//        // Language
-//        _languageTextLabel->hide();
-//        _languageComboBox->hide();
+        // Board
+        _boardTextLabel->hide();
+        _boardComboBox->hide();
 
-//        // Sound
-//        _soundTextLabel->hide();
-//        _soundToggleSwitch->hide();
+        // Language
+        _languageTextLabel->hide();
+        _languageComboBox->hide();
 
-//        // Theme
-//        _themeTextLabel->hide();
-//        _themeToggleSwitch->hide();
+        // Sound
+        _soundTextLabel->hide();
+        _soundToggleSwitch->hide();
 
-//        // Buttons background label
-//        _buttonsBgLabel->hide();
+        // Theme
+        _themeTextLabel->hide();
+        _themeToggleSwitch->hide();
 
-//        // Confirm Buttons
-//        _cancelPushButton->hide();
-//        _savePushButton->hide();
+        // Buttons background label
+        _buttonsBgLabel->hide();
 
-//        // Menu hide and show button
-//        if (gLanguage == Languages::Armenian)
-//        {
-//            _hideAndShowButton->setText("Ցուցադրել");
-//            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 27, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 27, (int)SettingsMenuProps::HideAndShowButtonH);
-//        }
-//        else if (gLanguage == Languages::Russian)
-//        {
-//            _hideAndShowButton->setText("Показать");
-//            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
-//        }
-//        else // English US
-//        {
-//            _hideAndShowButton->setText("Show");
-//            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
-//        }
-//        _isMenuVisible = false;
-//    }
-//    else
-//    {
-//        _bgLabel->show();
-//        _boardLabel->show();
-//        _piecesLabel->show();
+        // Confirm Buttons
+        _cancelPushButton->hide();
+        _savePushButton->hide();
 
-//        // Background image
-//        _bgImageTextLabel->show();
-//        _bgImageComboBox->show();
+        // Menu hide and show button
+        if (_tempData->language == Languages::Armenian)
+        {
+            _hideAndShowButton->setText("Ցուցադրել");
+            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 27, (int)SettingsMenuProps::HideAndShowButtonY,
+                                           (int)SettingsMenuProps::HideAndShowButtonW + 27, (int)SettingsMenuProps::HideAndShowButtonH);
+        }
+        else if (_tempData->language == Languages::Russian)
+        {
+            _hideAndShowButton->setText("Показать");
+            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY,
+                                           (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
+        }
+        else // English
+        {
+            _hideAndShowButton->setText("Show");
+            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY,
+                                           (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
+        }
+    }
+    else
+    {
+        _isMenuVisible = true;
 
-//        // Piece sets
-//        _pieceSetsTextLabel->show();
-//        _pieceSetsComboBox->show();
+        _bgLabel->show();
+        _boardLabel->show();
+        _piecesLabel->show();
 
-//        // Board
-//        _boardTextLabel->show();
-//        _boardComboBox->show();
+        // Background image
+        _bgImageTextLabel->show();
+        _bgImageComboBox->show();
 
-//        // Language
-//        _languageTextLabel->show();
-//        _languageComboBox->show();
+        // Piece sets
+        _pieceSetsTextLabel->show();
+        _pieceSetsComboBox->show();
 
-//        // Sound
-//        _soundTextLabel->show();
-//        _soundToggleSwitch->show();
+        // Board
+        _boardTextLabel->show();
+        _boardComboBox->show();
 
-//        // Theme
-//        _themeTextLabel->show();
-//        _themeToggleSwitch->show();
+        // Language
+        _languageTextLabel->show();
+        _languageComboBox->show();
 
-//        // Buttons background label
-//        _buttonsBgLabel->show();
+        // Sound
+        _soundTextLabel->show();
+        _soundToggleSwitch->show();
 
-//        // Confirm Buttons
-//        _cancelPushButton->show();
-//        _savePushButton->show();
+        // Theme
+        _themeTextLabel->show();
+        _themeToggleSwitch->show();
 
-//        // Menu hide and show button
-//        if (gLanguage == Languages::Armenian)
-//        {
-//            _hideAndShowButton->setText("Թաքցնել");
-//            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
-//        }
-//        else if (gLanguage == Languages::Russian)
-//        {
-//            _hideAndShowButton->setText("Скрыть");
-//            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 11, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 11, (int)SettingsMenuProps::HideAndShowButtonH);
-//        }
-//        else // English US
-//        {
-//            _hideAndShowButton->setText("Hide");
-//            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
-//        }
-//        _isMenuVisible = true;
-//    }
-//}
+        // Buttons background label
+        _buttonsBgLabel->show();
 
-//void SettingsMenu::changeMenuTheme()
-//{
-//    // Background label
-//    ::setStyleSheetByTheme(StylesPaths::lightThemeBkgLabelStyle, StylesPaths::darkThemeBkgLabelStyle, _bgLabel, globalIsDarkTheme);
+        // Confirm Buttons
+        _cancelPushButton->show();
+        _savePushButton->show();
 
-//    // Text for background image
-//    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _bgImageTextLabel, globalIsDarkTheme);
+        // Menu hide and show button
+        if (_tempData->language == Languages::Armenian)
+        {
+            _hideAndShowButton->setText("Թաքցնել");
+            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY,
+                                           (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
+        }
+        else if (_tempData->language == Languages::Russian)
+        {
+            _hideAndShowButton->setText("Скрыть");
+            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 11, (int)SettingsMenuProps::HideAndShowButtonY,
+                                           (int)SettingsMenuProps::HideAndShowButtonW + 11, (int)SettingsMenuProps::HideAndShowButtonH);
+        }
+        else // English
+        {
+            _hideAndShowButton->setText("Hide");
+            _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY,
+                                           (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
+        }
+    }
+}
 
-//    // Background image combobox
-//    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _bgImageComboBox, globalIsDarkTheme);
+void SettingsMenu::changeMenuTheme()
+{
+    // Background label
+    setStyleSheetByTheme(_bgLabel, StylesPaths::lightThemeBgLabelStyle, StylesPaths::darkThemeBgLabelStyle, _tempData->isDarkTheme);
 
-//    // Text for piece sets
-//    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _pieceSetsTextLabel, globalIsDarkTheme);
+    // Text for background image
+    setStyleSheetByTheme(_bgImageTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
 
-//    // Piece sets combobox
-//    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _pieceSetsComboBox, globalIsDarkTheme);
+    // Background image combobox
+    setStyleSheetByTheme(_bgImageComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
 
-//    // Text for board
-//    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _boardTextLabel, globalIsDarkTheme);
+    // Text for piece sets
+    setStyleSheetByTheme(_pieceSetsTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
 
-//    // Board combobox
-//    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _boardComboBox, globalIsDarkTheme);
+    // Piece sets combobox
+    setStyleSheetByTheme(_pieceSetsComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
 
-//    // Text for language
-//    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _languageTextLabel, globalIsDarkTheme);
+    // Text for board
+    setStyleSheetByTheme(_boardTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
 
-//    // Language combobox
-//    ::setStyleSheetByTheme(StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _languageComboBox, globalIsDarkTheme);
+    // Board combobox
+    setStyleSheetByTheme(_boardComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
 
-//    // Text for sound
-//    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _soundTextLabel, globalIsDarkTheme);
+    // Text for language
+    setStyleSheetByTheme(_languageTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
 
-//    // Text for theme
-//    ::setStyleSheetByTheme(StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _themeTextLabel, globalIsDarkTheme);
+    // Language combobox
+    setStyleSheetByTheme(_languageComboBox, StylesPaths::lightComboBoxStyle, StylesPaths::darkComboBoxStyle, _tempData->isDarkTheme);
 
-//    // Buttons background label
-//    ::setStyleSheetByTheme(StylesPaths::lightThemeButtonsLabelStyle, StylesPaths::darkThemeButtonsLabelStyle, _buttonsBgLabel, globalIsDarkTheme);
+    // Text for sound
+    setStyleSheetByTheme(_soundTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
 
-//    // Cancel push button
-//    ::setStyleSheetByTheme(StylesPaths::settingsMenuLightCancelButtonStyle, StylesPaths::settingsMenuDarkCancelButtonStyle, _cancelPushButton, globalIsDarkTheme);
-//}
+    // Text for theme
+    setStyleSheetByTheme(_themeTextLabel, StylesPaths::lightTextStyle, StylesPaths::darkBoldTextStyle, _tempData->isDarkTheme);
 
-//// Private slots
-//void SettingsMenu::bkgImageComboBoxIndexChanged(int index)
-//{
-//    _tempData.bkgImageNumber = index;
-//    _tempData.bkgImageStr = getBkgStr(index);
+    // Buttons background label
+    setStyleSheetByTheme(_buttonsBgLabel, StylesPaths::lightThemeButtonsLabelStyle, StylesPaths::darkThemeButtonsLabelStyle, _tempData->isDarkTheme);
 
-//    MainWindow::GetInstance()->setBackgroundImage(_tempData.bkgImageStr);
-//}
+    // Cancel push button
+    setStyleSheetByTheme(_cancelPushButton, StylesPaths::settingsMenuLightCancelButtonStyle, StylesPaths::settingsMenuDarkCancelButtonStyle, _tempData->isDarkTheme);
+}
 
-//void SettingsMenu::pieceSetsComboBoxIndexChanged(int index)
-//{
-//    QString pieceSet = getPieceSetStr(index);;
+// Private slots
+void SettingsMenu::bgImageComboBoxIndexChanged(int index)
+{
+    _tempData->bgImage = static_cast<BgImages>(index);
+    MainWindow::GetInstance()->setBackgroundImage(_tempData->bgImage);
+}
 
-//    _tempData.pieceSetNumber = index;
-//    _tempData.piecesSetStr = pieceSet;
+void SettingsMenu::pieceSetsComboBoxIndexChanged(int index)
+{
+    _tempData->pieceSet = static_cast<PieceSets>(index);
 
-//    _piecesLabel->setPixmap(QPixmap(ImagesPaths::settingsPiecesSetsPath + pieceSet + PieceSets::Extencion));
-//}
+    QString image = getPieceSetStrByNumber(_tempData->pieceSet);
+    image = replaceSpaceInString(image);
+    _piecesLabel->setPixmap(QPixmap(ImagesPaths::SettingsPiecesSetsPath + image + PieceSetsStr::Extencion));
+}
 
-//void SettingsMenu::boardComboBoxIndexChanged(int index)
-//{
-//    QString board = getBoardStr(index);;
+void SettingsMenu::boardComboBoxIndexChanged(int index)
+{
+    _tempData->board = static_cast<Boards>(index);
 
-//    _tempData.boardNumber = index;
-//    _tempData.boardStr = board;
+    QString image = getBoardStrByNumber(_tempData->board);
+    image = replaceSpaceInString(image);
+    _boardLabel->setPixmap(QPixmap(ImagesPaths::SettingsBoardsPath + image + BoardsStr::Extencion));
+}
 
-//    _boardLabel->setPixmap(QPixmap(ImagesPaths::settingsBoardsPath + board + PieceSets::Extencion));
-//}
+void SettingsMenu::languageComboBoxIndexChanged(int index)
+{
+    _tempData->language = static_cast<Languages>(index);
 
-//void SettingsMenu::languageComboBoxIndexChanged(int index)
-//{
-//    _tempData.languageNumber = index;
-//    _tempData.languageStr = getLanguageStr(index);
-//    gLanguage = _tempData.languageStr;
+    if (_tempData->language == Languages::Armenian)
+    {
+        _bgImageTextLabel->setText("Ետնանկար");
+        _pieceSetsTextLabel->setText("Խաղաքարեր");
+        _boardTextLabel->setText("Խաղատախտակ");
+        _languageTextLabel->setText("Լեզու");
+        _soundTextLabel->setText("Ձայն");
+        _themeTextLabel->setText("Սև ֆոն");
+        _cancelPushButton->setText("Չեղարկել");
+        _savePushButton->setText("Պահպանել");
+        _hideAndShowButton->setText("Թաքցնել");
+        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY,
+                                       (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
+    }
+    else if (_tempData->language == Languages::Russian)
+    {
+        _bgImageTextLabel->setText("Фоновое изображение");
+        _pieceSetsTextLabel->setText("Фигуры");
+        _boardTextLabel->setText("Доска");
+        _languageTextLabel->setText("Язык");
+        _soundTextLabel->setText("Включить звук");
+        _themeTextLabel->setText("Чёрная тема");
+        _cancelPushButton->setText("Отмена");
+        _savePushButton->setText("Сохранить");
+        _hideAndShowButton->setText("Скрыть");
+        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 11, (int)SettingsMenuProps::HideAndShowButtonY,
+                                       (int)SettingsMenuProps::HideAndShowButtonW + 11, (int)SettingsMenuProps::HideAndShowButtonH);
+    }
+    else // English US
+    {
+        _bgImageTextLabel->setText("Background Image");
+        _pieceSetsTextLabel->setText("Piece Set");
+        _boardTextLabel->setText("Board");
+        _languageTextLabel->setText("Language");
+        _soundTextLabel->setText("Play Sounds");
+        _themeTextLabel->setText("Dark Theme");
+        _cancelPushButton->setText("Cancel");
+        _savePushButton->setText("Save");
+        _hideAndShowButton->setText("Hide");
+        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY,
+                                       (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
+    }
+}
 
-//    if (gLanguage == Languages::Armenian)
-//    {
-//        _bgImageTextLabel->setText("Ետնանկար");
-//        _pieceSetsTextLabel->setText("Խաղաքարեր");
-//        _boardTextLabel->setText("Խաղատախտակ");
-//        _languageTextLabel->setText("Լեզու");
-//        _soundTextLabel->setText("Ձայն");
-//        _themeTextLabel->setText("Սև ֆոն");
-//        _cancelPushButton->setText("Չեղարկել");
-//        _savePushButton->setText("Պահպանել");
-//        _hideAndShowButton->setText("Թաքցնել");
-//        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 18, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 18, (int)SettingsMenuProps::HideAndShowButtonH);
-//    }
-//    else if (gLanguage == Languages::Russian)
-//    {
-//        _bgImageTextLabel->setText("Фоновое изображение");
-//        _pieceSetsTextLabel->setText("Фигуры");
-//        _boardTextLabel->setText("Доска");
-//        _languageTextLabel->setText("Язык");
-//        _soundTextLabel->setText("Включить звук");
-//        _themeTextLabel->setText("Чёрная тема");
-//        _cancelPushButton->setText("Отмена");
-//        _savePushButton->setText("Сохранить");
-//        _hideAndShowButton->setText("Скрыть");
-//        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX - 11, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW + 11, (int)SettingsMenuProps::HideAndShowButtonH);
-//    }
-//    else // English US
-//    {
-//        _bgImageTextLabel->setText("Background Image");
-//        _pieceSetsTextLabel->setText("Piece Set");
-//        _boardTextLabel->setText("Board");
-//        _languageTextLabel->setText("Language");
-//        _soundTextLabel->setText("Play Sounds");
-//        _themeTextLabel->setText("Dark Theme");
-//        _cancelPushButton->setText("Cancel");
-//        _savePushButton->setText("Save");
-//        _hideAndShowButton->setText("Hide");
-//        _hideAndShowButton->setGeometry((int)SettingsMenuProps::HideAndShowButtonX, (int)SettingsMenuProps::HideAndShowButtonY, (int)SettingsMenuProps::HideAndShowButtonW, (int)SettingsMenuProps::HideAndShowButtonH);
-//    }
-//}
+void SettingsMenu::swapMenuTheme()
+{
+    _tempData->isDarkTheme = !_tempData->isDarkTheme;
+    changeMenuTheme();
+}
 
-//void SettingsMenu::swapMenuTheme()
-//{
-//    if (_tempData.isDarkTheme)
-//    {
-//        _tempData.isDarkTheme = false;
-//        globalIsDarkTheme = false;
-//    }
-//    else
-//    {
-//        _tempData.isDarkTheme = true;
-//        globalIsDarkTheme = true;
-//    }
-
-//    changeMenuTheme();
-//}
-
-//void SettingsMenu::swapSound()
-//{
-//    if (_tempData.isSoundAvailable)
-//        _tempData.isSoundAvailable = false;
-//    else
-//        _tempData.isSoundAvailable = true;
-//}
+void SettingsMenu::swapSound()
+{
+    _tempData->isSoundOn = !_tempData->isSoundOn;
+}

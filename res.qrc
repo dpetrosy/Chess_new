@@ -20,6 +20,36 @@
         <file>images/backgrounds/The_Queen.jpg</file>
         <file>images/backgrounds/The_Rook.jpg</file>
         <file>images/backgrounds/Top_View.jpg</file>
+        <file>images/boards/8_Bit_ln.png</file>
+        <file>images/boards/Bases_ln.png</file>
+        <file>images/boards/Blue_ln.png</file>
+        <file>images/boards/Brown_ln.png</file>
+        <file>images/boards/Bubblegum_ln.png</file>
+        <file>images/boards/Burled_wood_ln.png</file>
+        <file>images/boards/Dark_wood_ln.png</file>
+        <file>images/boards/Dash_ln.png</file>
+        <file>images/boards/Glass_ln.png</file>
+        <file>images/boards/Graffiti_ln.png</file>
+        <file>images/boards/Green_ln.png</file>
+        <file>images/boards/Icy_Sea_ln.png</file>
+        <file>images/boards/Light_ln.png</file>
+        <file>images/boards/Lolz_ln.png</file>
+        <file>images/boards/Marble_ln.png</file>
+        <file>images/boards/Metal_ln.png</file>
+        <file>images/boards/Neon_ln.png</file>
+        <file>images/boards/Newspaper_ln.png</file>
+        <file>images/boards/Orange_ln.png</file>
+        <file>images/boards/Overlay_ln.png</file>
+        <file>images/boards/Parchment_ln.png</file>
+        <file>images/boards/Purple_ln.png</file>
+        <file>images/boards/Red_ln.png</file>
+        <file>images/boards/Sand_ln.png</file>
+        <file>images/boards/Sky_ln.png</file>
+        <file>images/boards/Stone_ln.png</file>
+        <file>images/boards/Tan_ln.png</file>
+        <file>images/boards/Tournament_ln.png</file>
+        <file>images/boards/Translucent_ln.png</file>
+        <file>images/boards/Walnut_ln.png</file>
         <file>images/game_widget/return_button/New folder/dark_return_button.png</file>
         <file>images/game_widget/return_button/New folder/light_return_button.png</file>
         <file>images/game_widget/return_button/dark_return_button.png</file>
@@ -66,8 +96,12 @@
         <file>images/menus/pvp/return_button/light_return_button.png</file>
         <file>images/menus/pvp/dark_theme_arrow.png</file>
         <file>images/menus/pvp/light_theme_arrow.png</file>
+        <file>images/menus/settings/boards/Bases.png</file>
         <file>images/menus/settings/boards/Blue.png</file>
+        <file>images/menus/settings/boards/Brown.png</file>
+        <file>images/menus/settings/boards/Bubblegum.png</file>
         <file>images/menus/settings/boards/Burled_Wood.png</file>
+        <file>images/menus/settings/boards/Dark_Wood.png</file>
         <file>images/menus/settings/boards/Dash.png</file>
         <file>images/menus/settings/boards/Glass.png</file>
         <file>images/menus/settings/boards/Graffiti.png</file>
@@ -314,14 +348,14 @@
         <file>styles/menus_styles/pvp_menu_styles/dark_quick_games_text.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/dark_quickgames_button.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/dark_quickgames_hover_button.txt</file>
-        <file>styles/menus_styles/pvp_menu_styles/dark_time_control_bkg_label.txt</file>
+        <file>styles/menus_styles/pvp_menu_styles/dark_time_control_bg_label.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/dark_top_text.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/dark_variant_combobox.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/light_color_button.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/light_quick_games_text.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/light_quickgames_button.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/light_quickgames_hover_button.txt</file>
-        <file>styles/menus_styles/pvp_menu_styles/light_time_control_bkg_label.txt</file>
+        <file>styles/menus_styles/pvp_menu_styles/light_time_control_bg_label.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/light_top_text.txt</file>
         <file>styles/menus_styles/pvp_menu_styles/light_variant_combobox.txt</file>
         <file>styles/menus_styles/settings_menu_styles/dark_theme_buttons_label.txt</file>
@@ -336,44 +370,14 @@
         <file>styles/menus_styles/dark_dim_text.txt</file>
         <file>styles/menus_styles/dark_slider.txt</file>
         <file>styles/menus_styles/dark_text.txt</file>
-        <file>styles/menus_styles/dark_theme_bkg_label.txt</file>
+        <file>styles/menus_styles/dark_theme_bg_label.txt</file>
         <file>styles/menus_styles/light_bold_dim_text.txt</file>
         <file>styles/menus_styles/light_bold_text.txt</file>
         <file>styles/menus_styles/light_combobox.txt</file>
         <file>styles/menus_styles/light_dim_text.txt</file>
         <file>styles/menus_styles/light_slider.txt</file>
         <file>styles/menus_styles/light_text.txt</file>
-        <file>styles/menus_styles/light_theme_bkg_label.txt</file>
+        <file>styles/menus_styles/light_theme_bg_label.txt</file>
         <file>styles/pieces_styles/pawn_prom_buttons_style.txt</file>
-        <file>images/boards/8_Bit_ln.png</file>
-        <file>images/boards/Bases_ln.png</file>
-        <file>images/boards/Blue_ln.png</file>
-        <file>images/boards/Brown_ln.png</file>
-        <file>images/boards/Bubblegum_ln.png</file>
-        <file>images/boards/Burled_wood_ln.png</file>
-        <file>images/boards/Dark_wood_ln.png</file>
-        <file>images/boards/Dash_ln.png</file>
-        <file>images/boards/Glass_ln.png</file>
-        <file>images/boards/Graffiti_ln.png</file>
-        <file>images/boards/Green_ln.png</file>
-        <file>images/boards/Icy_Sea_ln.png</file>
-        <file>images/boards/Light_ln.png</file>
-        <file>images/boards/Lolz_ln.png</file>
-        <file>images/boards/Marble_ln.png</file>
-        <file>images/boards/Metal_ln.png</file>
-        <file>images/boards/Neon_ln.png</file>
-        <file>images/boards/Newspaper_ln.png</file>
-        <file>images/boards/Orange_ln.png</file>
-        <file>images/boards/Overlay_ln.png</file>
-        <file>images/boards/Parchment_ln.png</file>
-        <file>images/boards/Purple_ln.png</file>
-        <file>images/boards/Red_ln.png</file>
-        <file>images/boards/Sand_ln.png</file>
-        <file>images/boards/Sky_ln.png</file>
-        <file>images/boards/Stone_ln.png</file>
-        <file>images/boards/Tan_ln.png</file>
-        <file>images/boards/Tournament_ln.png</file>
-        <file>images/boards/Translucent_ln.png</file>
-        <file>images/boards/Walnut_ln.png</file>
     </qresource>
 </RCC>

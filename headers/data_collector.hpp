@@ -36,10 +36,9 @@ public:
     void setSound(bool isSoundOn);
     void setTheme(bool isDarkTheme);
 
-    QString getBgImageStrByNumber(const BgImages& bgImage) const;
-    QString getLanguageStrByNumber(const Languages& language) const;
-    QString getPieceSetStrByNumber(const PieceSets& pieceSet) const;
-    QString getBoardStrByNumber(const Boards& board) const;
+    // Public functions
+    void resetTempData(SettingsData* tempData) const;
+    void saveTempData(const SettingsData* const tempData);
 
 private:
     explicit DataCollector();

@@ -14,20 +14,17 @@ class SettingsMenu : public QWidget
     Q_OBJECT
 
 public:
-    explicit SettingsMenu(MainWindow* mainWindow);
+    explicit SettingsMenu();
     virtual ~SettingsMenu();
 
-    //bool            getTheme();
-    //SettingsData&   getData();
     void            makeMenuBeforeSwitch();
 
 public slots:
     void saveButtonClicked();
     void cancelButtonClicked();
 
-
-private slots:
-    void bkgImageComboBoxIndexChanged(int index);
+public slots:
+    void bgImageComboBoxIndexChanged(int index);
     void pieceSetsComboBoxIndexChanged(int index);
     void boardComboBoxIndexChanged(int index);
     void languageComboBoxIndexChanged(int index);
@@ -38,12 +35,12 @@ private:
     void init();
     void initSettingsData();
 
-    void    makeSettingsMenu(MainWindow* mainWindow);
+    void    makeSettingsMenu();
     void    hideAndShowMenu();
     void    changeMenuTheme();
 
 private:
-    SettingsData  _tempData;
+    SettingsData* _tempData;
     QLabel*       _bgLabel;
     QLabel*       _boardLabel;
     QLabel*       _piecesLabel;

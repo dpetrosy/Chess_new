@@ -4,7 +4,7 @@
 
 #include "mainwindow.hpp"
 #include "mainmenu.hpp"
-#include "menus_helpers.hpp"
+#include "settingsmenu.hpp"
 #include "data_collector.hpp"
 #include "utils.hpp"
 #include "paths.hpp"
@@ -17,7 +17,7 @@ MainWindow::MainWindow()
     // Init class members
     init();
 
-    setBackgroundImage(_dataCollector->getBgImageStr());
+    setBackgroundImage(_dataCollector->getBgImage());
 
     // Make StackedWidget
     makeMenusStackedWidget();
@@ -34,7 +34,7 @@ MainWindow::~MainWindow()
     // Menus Widgets
     delete _MainMenuWidget;
     //delete _PVPMenuWidget;
-    //delete _SettingsMenuWidget;
+    delete _SettingsMenuWidget;
 
     // Chess game attributes
     //delete _GameWidget;
@@ -54,11 +54,28 @@ MainWindow *MainWindow::GetInstance()
     return _mainWindow;
 }
 
-// Public functions
-void MainWindow::setBackgroundImage(const QString& image)
+void MainWindow::init()
 {
-    QString imageName = replaceSpaceInString(image);
-    _backgroundImage.load(ImagesPaths::BackgroundsPath + imageName + BgImagesStr::Extencion);
+    _dataCollector = DataCollector::GetInstance();
+
+    // Menus Widgets
+    _MainMenuWidget = new MainMenu(this);
+    //_PVPMenuWidget = new PVPMenu();
+    _SettingsMenuWidget = new SettingsMenu();
+
+    // Menus StackedWidget
+    _MenusStackedWidget = new QStackedWidget(this);
+
+    // Chess game attributes
+    //_GameWidget = GameWidget::GetInstance(this);
+}
+
+// Public functions
+void MainWindow::setBackgroundImage(const BgImages& bgImage)
+{
+    QString image = getBgImageStrByNumber(bgImage);
+    image = replaceSpaceInString(image);
+    _backgroundImage.load(ImagesPaths::BackgroundsPath + image + BgImagesStr::Extencion);
     _backgroundImage = _backgroundImage.scaled(this->size(), Qt::IgnoreAspectRatio);
     _palette.setBrush(QPalette::Window, _backgroundImage);
     this->setPalette(_palette);
@@ -91,28 +108,17 @@ MainMenu* MainWindow::getMainMenu()
     return _MainMenuWidget;
 }
 
+SettingsMenu* MainWindow::getSettingsMenu()
+{
+    return _SettingsMenuWidget;
+}
+
 QStackedWidget* MainWindow::getStackedWidget()
 {
     return _MenusStackedWidget;
 }
 
 // Private functions
-void MainWindow::init()
-{
-    _dataCollector = DataCollector::GetInstance();
-
-    // Menus Widgets
-    _MainMenuWidget = new MainMenu(this);
-    //_PVPMenuWidget = new PVPMenu();
-    //_SettingsMenuWidget = new SettingsMenu();
-
-    // Menus StackedWidget
-    _MenusStackedWidget = new QStackedWidget(this);
-
-    // Chess game attributes
-    //_GameWidget = GameWidget::GetInstance(this);
-}
-
 void MainWindow::exitFromProgram(int signal)
 {
     QCoreApplication::exit(signal);
@@ -120,7 +126,7 @@ void MainWindow::exitFromProgram(int signal)
 
 void MainWindow::makeMenusStackedWidget()
 {
-    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget); //, _PVPMenuWidget, _SettingsMenuWidget, _GameWidget);
+    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget, _SettingsMenuWidget); //, _PVPMenuWidget, , _GameWidget);
 }
 
 // Util functions
@@ -128,6 +134,8 @@ void switchMenu(MainWindow* mainWindow, Menus toMenu)
 {
     if (toMenu == Menus::MainMenu)
         mainWindow->getMainMenu()->makeMenuBeforeSwitch(mainWindow);
+    else if (toMenu == Menus::SettingsMenu)
+        mainWindow->getSettingsMenu()->makeMenuBeforeSwitch();
     else if (toMenu == Menus::QuitMenu)
         mainWindow->showQuitWindow();
 

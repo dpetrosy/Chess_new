@@ -5,6 +5,7 @@
 #include <QStackedWidget>
 
 #include "helpers.hpp"
+#include "menus_helpers.hpp"
 #include "predefined_classes.hpp"
 
 // Singleton pattern used
@@ -20,11 +21,12 @@ public:
     virtual ~MainWindow();
 
 public:
-    void             setBackgroundImage(const QString& image);
+    void             setBackgroundImage(const BgImages& bgImage);
     void             showQuitWindow();
 
     // Getters
     MainMenu*        getMainMenu();
+    SettingsMenu*    getSettingsMenu();
     QStackedWidget*  getStackedWidget();
 
 private:
@@ -63,7 +65,7 @@ private:
     // Menus Widgets
     MainMenu*       _MainMenuWidget;
     //PVPMenu*        _PVPMenuWidget;
-    //SettingsMenu*   _SettingsMenuWidget;
+    SettingsMenu*   _SettingsMenuWidget;
     QStackedWidget* _MenusStackedWidget;
 
     // Chess game Widgets

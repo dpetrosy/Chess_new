@@ -1,9 +1,10 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
-#include <QPushButton>
 #include <QLabel>
+#include <QPushButton>
 
+#include "menus_helpers.hpp"
 //#include "pieces_helpers.hpp"
 
 void     setPushButtonSize(QPushButton *button, int width, int height);
@@ -12,6 +13,11 @@ void     setLabelTextFont(QLabel* label, int font);
 void     setStyleSheet(QWidget* obj, const QString& path);
 void     setStyleSheetByTheme(QWidget* obj, const QString& lightStylePath, const QString& darkStylePath, bool isDarkTheme);
 QString  replaceSpaceInString(const QString& str);
+
+QString  getBgImageStrByNumber(const BgImages& bgImage);
+QString  getLanguageStrByNumber(const Languages& language);
+QString  getPieceSetStrByNumber(const PieceSets& pieceSet);
+QString  getBoardStrByNumber(const Boards& board);
 
 
 //void     setQLabelPictureByTheme(QLabel* label, bool isDarkTheme, QString lightThemePicturePath, QString darkThemePicturePath);

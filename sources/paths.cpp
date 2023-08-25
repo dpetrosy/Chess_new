@@ -21,8 +21,8 @@ namespace ImagesPaths
 
     // Background images
     QString BackgroundsPath = ImagesPath + "backgrounds/";
-    QString LightThemeGameBkg = "light_theme_game_bkg";
-    QString DarkThemeGameBkg = "dark_theme_game_bkg";
+    QString LightThemeGameBg = "light_theme_game_Bg";
+    QString DarkThemeGameBg = "dark_theme_game_Bg";
 
     // Boards images
     QString BoardsPath = ImagesPath + "boards/";
@@ -148,8 +148,8 @@ namespace StylesPaths
 
     // General for menus
     QString MenusStylesPath = StylesPath + "menus_styles/";
-    QString lightThemeBkgLabelStyle = MenusStylesPath + "light_theme_bkg_label.txt";
-    QString darkThemeBkgLabelStyle = MenusStylesPath + "dark_theme_bkg_label.txt";
+    QString lightThemeBgLabelStyle = MenusStylesPath + "light_theme_bg_label.txt";
+    QString darkThemeBgLabelStyle = MenusStylesPath + "dark_theme_bg_label.txt";
     QString lightTextStyle = MenusStylesPath + "light_text.txt";
     QString darkTextStyle = MenusStylesPath + "dark_text.txt";
     QString lightBoldTextStyle = MenusStylesPath + "light_bold_text.txt";
@@ -181,8 +181,8 @@ namespace StylesPaths
     QString PVPMenuStylesPath = MenusStylesPath + "pvp_menu_styles/";
     QString lightTopTextStyle = PVPMenuStylesPath + "light_top_text.txt";
     QString darkTopTextStyle = PVPMenuStylesPath + "dark_top_text.txt";
-    QString lightTimeControlBkgLabelStyle = PVPMenuStylesPath + "light_time_control_bkg_label.txt";
-    QString darkTimeControlBkgLabelStyle = PVPMenuStylesPath + "dark_time_control_bkg_label.txt";
+    QString lightTimeControlBgLabelStyle = PVPMenuStylesPath + "light_time_control_bg_label.txt";
+    QString darkTimeControlBgLabelStyle = PVPMenuStylesPath + "dark_time_control_bg_label.txt";
     QString lightQuickGamesTextStyle = PVPMenuStylesPath + "light_quick_games_text.txt";
     QString darkQuickGamesTextStyle = PVPMenuStylesPath + "dark_quick_games_text.txt";
     QString lightQuickGamesButtonStyle = PVPMenuStylesPath + "light_quickgames_button.txt";
