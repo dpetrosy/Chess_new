@@ -15,12 +15,11 @@ class PVPMenu : public QWidget
 
 public:
     explicit PVPMenu();
-    virtual ~PVPMenu();
+    virtual ~PVPMenu() override;
 
-    void              makeMenuBeforeSwitch();
-//    void              setDataBeforeStartGame(double minutes, int incSeconds, PiecesColors color);
+    void makeMenuBeforeSwitch();
 
-public slots:
+private slots:
     void variantComboBoxIndexChanged(int index);
     void swapTimeControl();
     void minutesSliderValueChanged(int index);
@@ -35,11 +34,11 @@ private:
     QLabel*       _bgLabel;
     QLabel*       _topTextLabel;
 
-    // Game Variant
+    /* Game Variant */
     QLabel*       _gameVariantTextLabel;
     QComboBox*    _gameVariantComboBox;
 
-    // Time Control
+    /* Time Control */
     QLabel*       _timeControlBgLabel;
     QLabel*       _timeControlTextLabel;
     ToggleSwitch* _timeControlToggleSwitch;
@@ -51,7 +50,7 @@ private:
     QSlider*      _incSecondsSlider;
     bool          _isTimeOn;
 
-    // Quick Games
+    /* Quick Games */
     QLabel*           _quickGamesTextLabel;
     StartGameButton*  _bullet1MButton;
     StartGameButton*  _blitz3MButton;
@@ -60,12 +59,12 @@ private:
     StartGameButton*  _blitz10MButton;
     StartGameButton*  _rapid15MButton;
 
-    // Color buttons
+    /* Color buttons */
     StartGameButton*  _whiteColorButton;
     StartGameButton*  _blackColorButton;
     StartGameButton*  _randomColorButton;
 
-    // Return button
+    /* Return button */
     ClickableLabel*   _returnButton;
 };
 

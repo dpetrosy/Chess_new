@@ -4,8 +4,8 @@
 
 #include "mainwindow.hpp"
 #include "mainmenu.hpp"
-#include "settingsmenu.hpp"
 #include "pvpmenu.hpp"
+#include "settingsmenu.hpp"
 #include "data_collector.hpp"
 #include "utils.hpp"
 #include "paths.hpp"
@@ -66,9 +66,6 @@ void MainWindow::init()
 
     // Menus StackedWidget
     _MenusStackedWidget = new QStackedWidget(this);
-
-    // Chess game attributes
-    //_GameWidget = GameWidget::GetInstance(this);
 }
 
 // Public functions
@@ -96,7 +93,7 @@ void MainWindow::showQuitWindow()
         if (QMessageBox::question(this, "Подтверждение выхода", "Вы уверены, что хотите выйти?", QMessageBox::Yes|QMessageBox::Cancel, QMessageBox::Cancel) == QMessageBox::Yes)
             exitFromProgram(0);
     }
-    else // Endlish US
+    else // English
     {
         if (QMessageBox::question(this, "Quit confirmation", "Are you sure you want to quit?", QMessageBox::Yes|QMessageBox::Cancel, QMessageBox::Cancel) == QMessageBox::Yes)
             exitFromProgram(0);
@@ -132,7 +129,7 @@ void MainWindow::exitFromProgram(int signal)
 
 void MainWindow::makeMenusStackedWidget()
 {
-    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget, _PVPMenuWidget, _SettingsMenuWidget); // _GameWidget);
+    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget, _PVPMenuWidget, _SettingsMenuWidget);
 }
 
 // Util functions

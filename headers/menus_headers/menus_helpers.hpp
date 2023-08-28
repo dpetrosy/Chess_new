@@ -1,6 +1,8 @@
 #ifndef MENUS_HELPERS_HPP
 #define MENUS_HELPERS_HPP
 
+#include <QString>
+
 #include "helpers.hpp"
 
 //
@@ -32,6 +34,7 @@ enum class MainMenuProps
     VersionTextLabelW = 140,
     VersionTextLabelH = 20,
 };
+
 
 //
 // PVPMenu
@@ -157,34 +160,6 @@ enum class GameVariants
     FromPosition,
 };
 
-enum class StartGameButtons
-{
-    NoSelected = 0,
-    Bullet1M = 1,
-    Blitz3M = 2,
-    Blitz3MInc2Sec = 3,
-    Blitz5M = 4,
-    Blitz10M = 5,
-    Rapid15M = 6,
-    BlackColor = 7,
-    RandomColor = 8,
-    WhiteColor = 9
-};
-
-namespace StartGameButtonsStr
-{
-    extern QString NoSelected;
-    extern QString Bullet1M;
-    extern QString Blitz3M;
-    extern QString Blitz3MInc2Sec;
-    extern QString Blitz5M;
-    extern QString Blitz10M;
-    extern QString Rapid15M;
-    extern QString BlackColor;
-    extern QString RandomColor;
-    extern QString WhiteColor;
-}
-
 namespace GameVariantsStr
 {
     extern QString Standard;
@@ -196,6 +171,35 @@ namespace GameVariantsStr
     extern QString HordeSymbolsVector2D;
     extern QString StandardSymbolsVector2D;
 }
+
+enum class StartGameButtons
+{
+    NoSelected,
+    Bullet1M,
+    Blitz3M,
+    Blitz3MInc2Sec,
+    Blitz5M,
+    Blitz10M,
+    Rapid15M,
+    WhiteColor,
+    BlackColor,
+    RandomColor,
+};
+
+namespace StartGameButtonsStr
+{
+    extern QString NoSelected;
+    extern QString Bullet1M;
+    extern QString Blitz3M;
+    extern QString Blitz3MInc2Sec;
+    extern QString Blitz5M;
+    extern QString Blitz10M;
+    extern QString Rapid15M;
+    extern QString WhiteColor;
+    extern QString BlackColor;
+    extern QString RandomColor;
+}
+
 
 //
 // SettingsMenu
@@ -363,7 +367,7 @@ enum class Boards
     Tan,
     Tournament,
     Translucent,
-    Walnut
+    Walnut,
 };
 
 namespace BoardsStr

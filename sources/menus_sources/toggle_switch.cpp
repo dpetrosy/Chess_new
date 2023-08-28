@@ -1,5 +1,8 @@
 #include "toggle_switch.hpp"
 
+//
+// Animator class
+//
 Animator::Animator(QObject* target, QObject* parent) : QVariantAnimation(parent)
 {
     setTargetObject(target);
@@ -77,13 +80,17 @@ void Animator::setCurrentValue(const QVariant& value)
     updateCurrentValue(currentValue());
 }
 
+//
+// SelectionControl class
+//
 SelectionControl::SelectionControl(QWidget* parent) : QAbstractButton(parent)
 {
     setObjectName("SelectionControl");
     setCheckable(true);
 }
 
-SelectionControl::~SelectionControl() {}
+SelectionControl::~SelectionControl()
+{}
 
 void SelectionControl::enterEvent(QEvent* e)
 {
@@ -107,6 +114,21 @@ void SelectionControl::nextCheckState()
 {
     QAbstractButton::nextCheckState();
     SelectionControl::checkStateSet();
+}
+
+//
+// ToggleSwitch class
+//
+ToggleSwitch::ToggleSwitch(QWidget* parent) : SelectionControl(parent)
+{
+    init();
+}
+
+ToggleSwitch::~ToggleSwitch()
+{
+    delete thumbBrushAnimation;
+    delete trackBrushAnimation;
+    delete thumbPosAniamtion;
 }
 
 void ToggleSwitch::init()
@@ -148,11 +170,6 @@ QRect ToggleSwitch::textRect()
     return ltr(this) ? rect().marginsRemoved(QMargins(w, 0, 0, 0)) : rect().marginsRemoved(QMargins(0, 0, w, 0));
 }
 
-ToggleSwitch::ToggleSwitch(QWidget* parent) : SelectionControl(parent)
-{
-    init();
-}
-
 ToggleSwitch::ToggleSwitch(const QString& text, QWidget* parent) : ToggleSwitch(parent)
 {
     setText(text);
@@ -162,13 +179,6 @@ ToggleSwitch::ToggleSwitch(const QString& text, const QBrush& brush, QWidget* pa
 {
     style.thumbOnBrush = brush.color();
     style.trackOnBrush = brush.color();
-}
-
-ToggleSwitch::~ToggleSwitch()
-{
-    delete thumbBrushAnimation;
-    delete trackBrushAnimation;
-    delete thumbPosAniamtion;
 }
 
 QSize ToggleSwitch::sizeHint() const
@@ -211,7 +221,6 @@ void ToggleSwitch::paintEvent(QPaintEvent*)
 
         p.setBrush(thumbBrushAnimation->currentValue().value<QColor>());
         p.setRenderHint(QPainter::Antialiasing, true);
-        //        qDebug() << thumbRect << thumbPosAniamtion->currentValue();
         p.drawEllipse(thumbRect.center(), THUMB_RADIUS - SHADOW_ELEVATION - 1.0 + 3, THUMB_RADIUS - SHADOW_ELEVATION - 1.0 + 3);
         p.setRenderHint(QPainter::Antialiasing, false);
 
@@ -289,8 +298,8 @@ void ToggleSwitch::toggle(Qt::CheckState state)
             trackBrushAnimation->interpolate(colorFromOpacity(style.trackOffBrush, style.trackOffOpacity), trackEnd);
         }
     }
-    else
-    { // Qt::Unchecked
+    else // Qt::Unchecked
+    {
         const QVariant posEnd = -11;
         const QVariant thumbEnd = colorFromOpacity(style.thumbOffBrush, style.thumbOffOpacity);
         const QVariant trackEnd = colorFromOpacity(style.trackOffBrush, style.trackOffOpacity);
@@ -310,9 +319,8 @@ void ToggleSwitch::toggle(Qt::CheckState state)
     }
 }
 
-void ToggleSwitch::enterEvent(QEnterEvent *event)
+void ToggleSwitch::enterEvent(QEnterEvent* event)
 {
     this->setCursor(Qt::PointingHandCursor);
-
     QAbstractButton::enterEvent(event);
 }

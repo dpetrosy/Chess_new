@@ -173,7 +173,7 @@ void StartGameButton::setButtonStr()
 {
     switch (_button)
     {
-    default:
+    default: /* Random color */
         _buttonStr = StartGameButtonsStr::RandomColor;
         break;
     case StartGameButtons::Bullet1M:

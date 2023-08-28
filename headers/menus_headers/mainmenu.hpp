@@ -22,7 +22,7 @@ public:
 
 private:
     void init();
-    void makeMainMenu(MainWindow *mainWindow);
+    void makeMainMenu(MainWindow* mainWindow);
 
 private:
     // Widgets

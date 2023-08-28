@@ -35,19 +35,18 @@ private:
 
     void init();
     void exitFromProgram(int signal);
-
     void makeMenusStackedWidget();
 
     // StackedWidget maker
     template <typename T, typename... Types>
-    void makeStackedWidget(QStackedWidget *stackedWidget, T widget, Types... arg2)
+    void makeStackedWidget(QStackedWidget* stackedWidget, T widget, Types... arg2)
     {
         stackedWidget->addWidget(widget);
         return makeStackedWidget(stackedWidget, arg2...);
     }
 
     // Template Specialization
-    void makeStackedWidget(QStackedWidget *stackedWidget)
+    void makeStackedWidget(QStackedWidget* stackedWidget)
     {
         Q_UNUSED(stackedWidget)
         return;
@@ -55,22 +54,19 @@ private:
 
 private:
     // Singleton pattern realization
-    static MainWindow* _mainWindow;
+    static MainWindow*  _mainWindow;
 
-    DataCollector*  _dataCollector;
+    DataCollector*      _dataCollector;
 
     // Images
-    QPixmap         _backgroundImage;
-    QPalette        _palette;
+    QPixmap             _backgroundImage;
+    QPalette            _palette;
 
     // Menus Widgets
-    MainMenu*       _MainMenuWidget;
-    PVPMenu*        _PVPMenuWidget;
-    SettingsMenu*   _SettingsMenuWidget;
-    QStackedWidget* _MenusStackedWidget;
-
-    // Chess game Widgets
-    //GameWidget*     _GameWidget;
+    MainMenu*           _MainMenuWidget;
+    PVPMenu*            _PVPMenuWidget;
+    SettingsMenu*       _SettingsMenuWidget;
+    QStackedWidget*     _MenusStackedWidget;
 };
 
 // Util functions

@@ -12,7 +12,7 @@ public:
     ~ClickableLabel();
 
 signals:
-    virtual void clickedLeftButton();
+    void clickedLeftButton();
 
 private:
     virtual void mousePressEvent(QMouseEvent* event);

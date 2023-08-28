@@ -17,27 +17,26 @@ public:
     explicit SettingsMenu();
     virtual ~SettingsMenu();
 
-    void            makeMenuBeforeSwitch();
+    void makeMenuBeforeSwitch();
 
-public slots:
-    void saveButtonClicked();
-    void cancelButtonClicked();
-
-public slots:
+private slots:
     void bgImageComboBoxIndexChanged(int index);
     void pieceSetsComboBoxIndexChanged(int index);
     void boardComboBoxIndexChanged(int index);
     void languageComboBoxIndexChanged(int index);
-    void swapMenuTheme();
     void swapSound();
+    void swapMenuTheme();
+
+    void saveButtonClicked();
+    void cancelButtonClicked();
+    void hideAndShowMenu();
 
 private:
     void init();
     void initSettingsData();
 
-    void    makeSettingsMenu();
-    void    hideAndShowMenu();
-    void    changeMenuTheme();
+    void makeSettingsMenu();
+    void changeMenuTheme();
 
 private:
     SettingsData* _tempData;
@@ -45,38 +44,38 @@ private:
     QLabel*       _boardLabel;
     QLabel*       _piecesLabel;
 
-    // Background image
+    /* Background image */
     QLabel*       _bgImageTextLabel;
     QComboBox*    _bgImageComboBox;
 
-    // Piece sets
+    /* Piece sets */
     QLabel*       _pieceSetsTextLabel;
     QComboBox*    _pieceSetsComboBox;
 
-    // Board
+    /* Board */
     QLabel*       _boardTextLabel;
     QComboBox*    _boardComboBox;
 
-    // Language
+    /* Language */
     QLabel*       _languageTextLabel;
     QComboBox*    _languageComboBox;
 
-    // Sound
+    /* Sound */
     QLabel*       _soundTextLabel;
     ToggleSwitch* _soundToggleSwitch;
 
-    // Theme
+    /* Theme */
     QLabel*       _themeTextLabel;
     ToggleSwitch* _themeToggleSwitch;
 
-    // Buttons background label
+    /* Buttons background label */
     QLabel*       _buttonsBgLabel;
 
-    // Confirm Buttons
+    /* Confirm Buttons */
     QPushButton*  _savePushButton;
     QPushButton*  _cancelPushButton;
 
-    // Menu hide and show button
+    /* Menu hide and show button */
     bool          _isMenuVisible;
     QPushButton*  _hideAndShowButton;
 };

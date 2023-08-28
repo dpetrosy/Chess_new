@@ -31,6 +31,56 @@ namespace ImagesPaths
     extern QString BoardsPath;
 
 
+    //
+    // PVP menu paths
+    //
+    extern QString PVPMenuPath;
+
+    extern QString LightStartButtonsPath;
+    extern QString LightBullet1MButton;
+    extern QString LightBlitz3MButton;
+    extern QString LightBlitz3MInc2SecButton;
+    extern QString LightBlitz5MButton;
+    extern QString LightBlitz10MButton;
+    extern QString LightRapid15MButton;
+    extern QString LightWhiteColorButton;
+    extern QString LightBlackColorButton;
+    extern QString LightRandomColorButton;
+    extern QString LightReturnButton;
+
+    extern QString LightHoverStartButtonsPath;
+    extern QString LightBullet1MHoverButton;
+    extern QString LightBlitz3MHoverButton;
+    extern QString LightBlitz3MInc2SecHoverButton;
+    extern QString LightBlitz5MHoverButton;
+    extern QString LightBlitz10MHoverButton;
+    extern QString LightRapid15MHoverButton;
+    extern QString LightWhiteColorHoverButton;
+    extern QString LightBlackColorHoverButton;
+    extern QString LightRandomColorHoverButton;
+
+    extern QString DarkStartButtonsPath;
+    extern QString DarkBullet1MButton;
+    extern QString DarkBlitz3MButton;
+    extern QString DarkBlitz3MInc2SecButton;
+    extern QString DarkBlitz5MButton;
+    extern QString DarkBlitz10MButton;
+    extern QString DarkRapid15MButton;
+    extern QString DarkWhiteColorButton;
+    extern QString DarkBlackColorButton;
+    extern QString DarkRandomColorButton;
+    extern QString DarkReturnButton;
+
+    extern QString DarkHoverStartButtonsPath;
+    extern QString DarkBullet1MHoverButton;
+    extern QString DarkBlitz3MHoverButton;
+    extern QString DarkBlitz3MInc2SecHoverButton;
+    extern QString DarkBlitz5MHoverButton;
+    extern QString DarkBlitz10MHoverButton;
+    extern QString DarkRapid15MHoverButton;
+    extern QString DarkWhiteColorHoverButton;
+    extern QString DarkBlackColorHoverButton;
+    extern QString DarkRandomColorHoverButton;
 
 
 
@@ -39,15 +89,9 @@ namespace ImagesPaths
 
 
 
-
-
-
-
-
-    // Steps images
-    extern QString stepsPath;
-
+    //
     // Pieces images
+    //
     extern QString piecesPath;
 
     extern QString AlphaPath;
@@ -69,70 +113,24 @@ namespace ImagesPaths
 
 
 
-
-
-    // PVP menu
-    extern QString pvpPath;
-
-    extern QString LightStartButtonsPath;
-    extern QString LightBullet1MButton;
-    extern QString LightBlitz3MButton;
-    extern QString LightBlitz3MInc2SecButton;
-    extern QString LightBlitz5MButton;
-    extern QString LightBlitz10MButton;
-    extern QString LightRapid15MButton;
-    extern QString LightBlackColorButton;
-    extern QString LightRandomColorButton;
-    extern QString LightWhiteColorButton;
-    extern QString LightReturnButton;
-
-    extern QString LightHoverStartButtonsPath;
-    extern QString LightBullet1MHoverButton;
-    extern QString LightBlitz3MHoverButton;
-    extern QString LightBlitz3MInc2SecHoverButton;
-    extern QString LightBlitz5MHoverButton;
-    extern QString LightBlitz10MHoverButton;
-    extern QString LightRapid15MHoverButton;
-    extern QString LightBlackColorHoverButton;
-    extern QString LightRandomColorHoverButton;
-    extern QString LightWhiteColorHoverButton;
-
-    extern QString DarkStartButtonsPath;
-    extern QString DarkBullet1MButton;
-    extern QString DarkBlitz3MButton;
-    extern QString DarkBlitz3MInc2SecButton;
-    extern QString DarkBlitz5MButton;
-    extern QString DarkBlitz10MButton;
-    extern QString DarkRapid15MButton;
-    extern QString DarkBlackColorButton;
-    extern QString DarkRandomColorButton;
-    extern QString DarkWhiteColorButton;
-    extern QString DarkReturnButton;
-
-    extern QString DarkHoverStartButtonsPath;
-    extern QString DarkBullet1MHoverButton;
-    extern QString DarkBlitz3MHoverButton;
-    extern QString DarkBlitz3MInc2SecHoverButton;
-    extern QString DarkBlitz5MHoverButton;
-    extern QString DarkBlitz10MHoverButton;
-    extern QString DarkRapid15MHoverButton;
-    extern QString DarkBlackColorHoverButton;
-    extern QString DarkRandomColorHoverButton;
-    extern QString DarkWhiteColorHoverButton;
-
     // GameWidget images
     extern QString GameWidgetPath;
     extern QString GameWidgetReturnButtonPath;
 
     extern QString GameWidgetLightReturnButton;
     extern QString GameWidgetDarkReturnButton;
+
+    // Steps images
+    extern QString stepsPath;
 }
 
 namespace StylesPaths
 {
     extern QString StylesPath;
 
+    //
     // General for menus
+    //
     extern QString MenusStylesPath;
     extern QString lightThemeBgLabelStyle;
     extern QString darkThemeBgLabelStyle;
@@ -149,21 +147,16 @@ namespace StylesPaths
     extern QString lightBoldDimTextStyle;
     extern QString darkBoldDimTextStyle;
 
-    // Main menu
+    //
+    // Main menu styles
+    //
     extern QString MainMenuStylesPath;
     extern QString VersionTextStyle;
     extern QString MainMenuButtonStyle;
 
-    // Settings menu
-    extern QString SettingsMenuStylesPath;
-    extern QString hideAndShowButtonStyle;
-    extern QString lightThemeButtonsLabelStyle;
-    extern QString darkThemeButtonsLabelStyle;
-    extern QString settingsMenuLightCancelButtonStyle;
-    extern QString settingsMenuDarkCancelButtonStyle;
-    extern QString settingsMenuSaveButtonStyle;
-
-    // PVP menu
+    //
+    // PVP menu styles
+    //
     extern QString PVPMenuStylesPath;
     extern QString lightTopTextStyle;
     extern QString darkTopTextStyle;
@@ -178,6 +171,22 @@ namespace StylesPaths
     extern QString darkColorButtonStyle;
     extern QString lightVariantComboboxStyle;
     extern QString darkVariantComboboxStyle;
+
+    //
+    // Settings menu styles
+    //
+    extern QString SettingsMenuStylesPath;
+    extern QString hideAndShowButtonStyle;
+    extern QString lightThemeButtonsLabelStyle;
+    extern QString darkThemeButtonsLabelStyle;
+    extern QString settingsMenuLightCancelButtonStyle;
+    extern QString settingsMenuDarkCancelButtonStyle;
+    extern QString settingsMenuSaveButtonStyle;
+
+
+
+
+
 
     // Pieces styles
     extern QString PiecesStylesPath;

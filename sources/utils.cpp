@@ -16,7 +16,7 @@ void setPushButtonFont(QPushButton *button, int font)
     button->setFont(buttonFont);
 }
 
-void setLabelTextFont(QLabel* label, int font)
+void setQLabelTextFont(QLabel* label, int font)
 {
     QFont buttonFont = label->font();
     buttonFont.setPointSize(font);

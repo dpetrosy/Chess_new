@@ -21,7 +21,7 @@ SOURCES += \
     sources/menus_sources/pvpmenu.cpp \
     sources/menus_sources/settingsmenu.cpp \
     sources/menus_sources/start_game_button.cpp \
-    sources/menus_sources/toggleswitch.cpp \
+    sources/menus_sources/toggle_switch.cpp \
     sources/paths.cpp \
     sources/utils.cpp
 

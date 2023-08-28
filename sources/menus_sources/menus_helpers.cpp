@@ -47,6 +47,7 @@ namespace StartGameButtonsStr
     QString WhiteColor = "WhiteColor";
 }
 
+
 //
 // Settings menu
 //
@@ -134,6 +135,7 @@ namespace LanguagesStr
     QString Russian = "Русский";
     QString English = "English";
 }
+
 
 //
 // Moves Widget

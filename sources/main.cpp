@@ -3,7 +3,7 @@
 
 #include "mainwindow.hpp"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QString logoImagePath = ":/images/logos/logo.png";
 
@@ -15,8 +15,6 @@ int main(int argc, char *argv[])
     w->show();
 
     auto retValue = app.exec();
-
     delete w;
-
     return retValue;
 }

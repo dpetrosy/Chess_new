@@ -1,8 +1,6 @@
 #ifndef START_GAME_BUTTON_HPP
 #define START_GAME_BUTTON_HPP
 
-#include <QMouseEvent>
-
 #include "menus_helpers.hpp"
 #include "clickablelabel.hpp"
 
@@ -12,14 +10,14 @@ class StartGameButton : public ClickableLabel
 
 public:
     explicit StartGameButton(QWidget* parent, const StartGameButtons& button);
-    virtual ~StartGameButton();
+    virtual ~StartGameButton() override;
 
+private:
     // Enter and leave events
     using QLabel::enterEvent;
     void enterEvent(QEnterEvent* event) override;
     void leaveEvent(QEvent* event) override;
 
-private:
     void changeImg(QString image, QString stylePath);
     void setButtonStr();
 

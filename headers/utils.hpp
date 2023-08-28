@@ -7,9 +7,9 @@
 #include "menus_helpers.hpp"
 //#include "pieces_helpers.hpp"
 
-void     setPushButtonSize(QPushButton *button, int width, int height);
-void     setPushButtonFont(QPushButton *button, int font);
-void     setLabelTextFont(QLabel* label, int font);
+void     setPushButtonSize(QPushButton* button, int width, int height);
+void     setPushButtonFont(QPushButton* button, int font);
+void     setQLabelTextFont(QLabel* label, int font);
 void     setStyleSheet(QWidget* obj, const QString& path);
 void     setStyleSheetByTheme(QWidget* obj, const QString& lightStylePath, const QString& darkStylePath, bool isDarkTheme);
 QString  replaceSpaceInString(const QString& str);

@@ -1,15 +1,13 @@
 #ifndef HELPERS_HPP
 #define HELPERS_HPP
 
-#include <QString>
-
-enum class MainWindowProps : int
+enum class MainWindowProps
 {
     windowSizeW = 1050,
     windowSizeH = 700,
 };
 
-enum class Menus : int
+enum class Menus
 {
     MainMenu,
     PVPMenu,
