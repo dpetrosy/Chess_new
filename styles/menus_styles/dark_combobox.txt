@@ -29,5 +29,5 @@ QComboBox::drop-down
 
 QComboBox::down-arrow
 {
-    image: url(:/images/images/menus/settings/dark_theme_arrow.png);
+    image: url(:/images/menus/settings/dark_theme_arrow.png);
 }

@@ -73,10 +73,10 @@ namespace ImagesPaths
 
 
     // PVP menu
-    QString pvpPath = MenusImagesPath + "pvp/";
-    QString returnButtonPath = pvpPath + "return_button/";
+    QString PVPMenuPath = MenusImagesPath + "pvp/";
+    QString ReturnButtonPath = PVPMenuPath + "return_button/";
 
-    QString LightStartButtonsPath = pvpPath + "light_start_buttons/";
+    QString LightStartButtonsPath = PVPMenuPath + "light_start_buttons/";
     QString LightBullet1MButton = LightStartButtonsPath + "bullet_1M.png";
     QString LightBlitz3MButton = LightStartButtonsPath + "blitz_3M.png";
     QString LightBlitz3MInc2SecButton = LightStartButtonsPath + "blitz_3M_inc2sec.png";
@@ -86,9 +86,9 @@ namespace ImagesPaths
     QString LightBlackColorButton = LightStartButtonsPath + "black_color.png";
     QString LightRandomColorButton = LightStartButtonsPath + "random_color.png";
     QString LightWhiteColorButton = LightStartButtonsPath + "white_color.png";
-    QString LightReturnButton = returnButtonPath + "light_return_button.png";
+    QString LightReturnButton = ReturnButtonPath + "light_return_button.png";
 
-    QString LightHoverStartButtonsPath = pvpPath + "light_hover_start_buttons/";
+    QString LightHoverStartButtonsPath = PVPMenuPath + "light_hover_start_buttons/";
     QString LightBullet1MHoverButton = LightHoverStartButtonsPath + "bullet_1M_hover.png";
     QString LightBlitz3MHoverButton = LightHoverStartButtonsPath + "blitz_3M_hover.png";
     QString LightBlitz3MInc2SecHoverButton = LightHoverStartButtonsPath + "blitz_3M_inc2sec_hover.png";
@@ -99,7 +99,7 @@ namespace ImagesPaths
     QString LightRandomColorHoverButton = LightHoverStartButtonsPath + "random_color_hover.png";
     QString LightWhiteColorHoverButton = LightHoverStartButtonsPath + "white_color_hover.png";
 
-    QString DarkStartButtonsPath = pvpPath + "dark_start_buttons/";
+    QString DarkStartButtonsPath = PVPMenuPath + "dark_start_buttons/";
     QString DarkBullet1MButton = DarkStartButtonsPath + "bullet_1M.png";
     QString DarkBlitz3MButton = DarkStartButtonsPath + "blitz_3M.png";
     QString DarkBlitz3MInc2SecButton = DarkStartButtonsPath + "blitz_3M_inc2sec.png";
@@ -109,9 +109,9 @@ namespace ImagesPaths
     QString DarkBlackColorButton = DarkStartButtonsPath + "black_color.png";
     QString DarkRandomColorButton = DarkStartButtonsPath + "random_color.png";
     QString DarkWhiteColorButton = DarkStartButtonsPath + "white_color.png";
-    QString DarkReturnButton = returnButtonPath + "dark_return_button.png";
+    QString DarkReturnButton = ReturnButtonPath + "dark_return_button.png";
 
-    QString DarkHoverStartButtonsPath = pvpPath + "dark_hover_start_buttons/";
+    QString DarkHoverStartButtonsPath = PVPMenuPath + "dark_hover_start_buttons/";
     QString DarkBullet1MHoverButton = DarkHoverStartButtonsPath + "bullet_1M_hover.png";
     QString DarkBlitz3MHoverButton = DarkHoverStartButtonsPath + "blitz_3M_hover.png";
     QString DarkBlitz3MInc2SecHoverButton = DarkHoverStartButtonsPath + "blitz_3M_inc2sec_hover.png";

@@ -3,49 +3,49 @@
 //
 // PVPMenu
 //
-//namespace GameVariants
-//{
-//QString Standard = "Standard";
-//QString Chess960 = "Chess960";
-//QString KingOfTheHill = "King_of_the_Hill";
-//QString ThreeCheck = "Three-check";
-//QString Horde = "Horde";
-//QString FromPosition = "From_Position";
+namespace GameVariantsStr
+{
+    QString Standard = "Standard";
+    QString Chess960 = "Chess960";
+    QString KingOfTheHill = "King of the Hill";
+    QString ThreeCheck = "Three-check";
+    QString Horde = "Horde";
+    QString FromPosition = "From Position";
 
-//QString HordeSymbolsVector2D = \
-//    "rnbqkbnr\
-//    pppppppp\
-//    00000000\
-//    0PP00PP0\
-//    PPPPPPPP\
-//    PPPPPPPP\
-//    PPPPPPPP\
-//    PPPPPPPP";
+    QString HordeSymbolsVector2D = \
+        "rnbqkbnr\
+        pppppppp\
+        00000000\
+        0PP00PP0\
+        PPPPPPPP\
+        PPPPPPPP\
+        PPPPPPPP\
+        PPPPPPPP";
 
-//    QString StandardSymbolsVector2D = \
-//    "rnbqkbnr\
-//    pppppppp\
-//    00000000\
-//    00000000\
-//    00000000\
-//    00000000\
-//    PPPPPPPP\
-//    RNBQKBNR";
-//};
+        QString StandardSymbolsVector2D = \
+        "rnbqkbnr\
+        pppppppp\
+        00000000\
+        00000000\
+        00000000\
+        00000000\
+        PPPPPPPP\
+        RNBQKBNR";
+};
 
-//namespace StartGameButtonName
-//{
-//QString NoSelected = "NoSelected";
-//QString Bullet1M = "Bullet1M";
-//QString Blitz3M = "Blitz3M";
-//QString Blitz3MInc2Sec = "Blitz3MInc2Sec";
-//QString Blitz5M = "Blitz5M";
-//QString Blitz10M = "Blitz10M";
-//QString Rapid15M = "Rapid15M";
-//QString BlackColor = "BlackColor";
-//QString RandomColor = "RandomColor";
-//QString WhiteColor = "WhiteColor";
-//}
+namespace StartGameButtonsStr
+{
+    QString NoSelected = "NoSelected";
+    QString Bullet1M = "Bullet1M";
+    QString Blitz3M = "Blitz3M";
+    QString Blitz3MInc2Sec = "Blitz3MInc2Sec";
+    QString Blitz5M = "Blitz5M";
+    QString Blitz10M = "Blitz10M";
+    QString Rapid15M = "Rapid15M";
+    QString BlackColor = "BlackColor";
+    QString RandomColor = "RandomColor";
+    QString WhiteColor = "WhiteColor";
+}
 
 //
 // Settings menu

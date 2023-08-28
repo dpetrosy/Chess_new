@@ -2,6 +2,7 @@
 
 namespace DefaultData
 {
+    // Settings menu data
     BgImages  BgImage = BgImages::StrongKnight;
     QString BgImageStr = BgImagesStr::StrongKnight;
 
@@ -16,4 +17,17 @@ namespace DefaultData
 
     bool isSoundOn = true;
     bool isDarkTheme = false;
+
+    // PVP menu data
+    bool isTimeOn = false;
+    GameVariants GameVariant = GameVariants::Standard;
+    QString GameVariantsStr = GameVariantsStr::Standard;
+
+    int GameMinutes = 10;
+    int MinutesSliderIndex = 13;
+    QString MinutesSliderNumberStr = "10";
+
+    int GameIncSeconds = 0;
+    int IncSecondsIndex = 0;
+    QString IncSecondsNumberStr = "0";
 }

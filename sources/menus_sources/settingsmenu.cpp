@@ -106,15 +106,13 @@ void SettingsMenu::init()
 
 void SettingsMenu::initSettingsData()
 {
-    auto dataCollector = DataCollector::GetInstance();
-
     _tempData = new SettingsData();
-    _tempData->bgImage = dataCollector->getBgImage();
-    _tempData->board = dataCollector->getBoard();
-    _tempData->pieceSet = dataCollector->getPieceSet();
-    _tempData->language = dataCollector->getLanguage();
-    _tempData->isSoundOn = dataCollector->isSoundOn();
-    _tempData->isDarkTheme = dataCollector->isDarkTheme();
+    _tempData->bgImage = DefaultData::BgImage;
+    _tempData->board = DefaultData::Board;
+    _tempData->pieceSet = DefaultData::PieceSet;
+    _tempData->language = DefaultData::Language;
+    _tempData->isSoundOn = DefaultData::isSoundOn;
+    _tempData->isDarkTheme = DefaultData::isDarkTheme;
 }
 
 // Public slots
@@ -326,7 +324,6 @@ void SettingsMenu::makeSettingsMenu()
     _boardComboBox->addItem(BoardsStr::Walnut);
     _boardComboBox->setCurrentIndex((int)_tempData->board);
     connect(_boardComboBox, &QComboBox::currentIndexChanged, this, &SettingsMenu::boardComboBoxIndexChanged);
-
 
     // Text for language
     _languageTextLabel->setGeometry((int)SettingsMenuProps::LanguageTextLabelX, (int)SettingsMenuProps::LanguageTextLabelY,

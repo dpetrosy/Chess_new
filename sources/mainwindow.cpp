@@ -5,6 +5,7 @@
 #include "mainwindow.hpp"
 #include "mainmenu.hpp"
 #include "settingsmenu.hpp"
+#include "pvpmenu.hpp"
 #include "data_collector.hpp"
 #include "utils.hpp"
 #include "paths.hpp"
@@ -33,7 +34,7 @@ MainWindow::~MainWindow()
 
     // Menus Widgets
     delete _MainMenuWidget;
-    //delete _PVPMenuWidget;
+    delete _PVPMenuWidget;
     delete _SettingsMenuWidget;
 
     // Chess game attributes
@@ -60,7 +61,7 @@ void MainWindow::init()
 
     // Menus Widgets
     _MainMenuWidget = new MainMenu(this);
-    //_PVPMenuWidget = new PVPMenu();
+    _PVPMenuWidget = new PVPMenu();
     _SettingsMenuWidget = new SettingsMenu();
 
     // Menus StackedWidget
@@ -108,6 +109,11 @@ MainMenu* MainWindow::getMainMenu()
     return _MainMenuWidget;
 }
 
+PVPMenu* MainWindow::getPVPMenu()
+{
+    return _PVPMenuWidget;
+}
+
 SettingsMenu* MainWindow::getSettingsMenu()
 {
     return _SettingsMenuWidget;
@@ -126,18 +132,27 @@ void MainWindow::exitFromProgram(int signal)
 
 void MainWindow::makeMenusStackedWidget()
 {
-    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget, _SettingsMenuWidget); //, _PVPMenuWidget, , _GameWidget);
+    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget, _PVPMenuWidget, _SettingsMenuWidget); // _GameWidget);
 }
 
 // Util functions
 void switchMenu(MainWindow* mainWindow, Menus toMenu)
 {
-    if (toMenu == Menus::MainMenu)
+    switch (toMenu)
+    {
+    default:
         mainWindow->getMainMenu()->makeMenuBeforeSwitch(mainWindow);
-    else if (toMenu == Menus::SettingsMenu)
+        break;
+    case Menus::PVPMenu:
+        mainWindow->getPVPMenu()->makeMenuBeforeSwitch();
+        break;
+    case Menus::SettingsMenu:
         mainWindow->getSettingsMenu()->makeMenuBeforeSwitch();
-    else if (toMenu == Menus::QuitMenu)
+        break;
+    case Menus::QuitMenu:
         mainWindow->showQuitWindow();
+        break;
+    }
 
     if (toMenu != Menus::QuitMenu)
         mainWindow->getStackedWidget()->setCurrentIndex((int)toMenu);

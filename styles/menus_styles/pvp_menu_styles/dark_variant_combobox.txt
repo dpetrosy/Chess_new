@@ -30,5 +30,5 @@ QComboBox::drop-down
 
 QComboBox::down-arrow
 {
-    image: url(:/images/images/menus/pvp/dark_theme_arrow.png);
+    image: url(:/images/menus/pvp/dark_theme_arrow.png);
 }

@@ -26,6 +26,7 @@ public:
 
     // Getters
     MainMenu*        getMainMenu();
+    PVPMenu*         getPVPMenu();
     SettingsMenu*    getSettingsMenu();
     QStackedWidget*  getStackedWidget();
 
@@ -56,15 +57,15 @@ private:
     // Singleton pattern realization
     static MainWindow* _mainWindow;
 
+    DataCollector*  _dataCollector;
+
     // Images
     QPixmap         _backgroundImage;
     QPalette        _palette;
 
-    DataCollector*  _dataCollector;
-
     // Menus Widgets
     MainMenu*       _MainMenuWidget;
-    //PVPMenu*        _PVPMenuWidget;
+    PVPMenu*        _PVPMenuWidget;
     SettingsMenu*   _SettingsMenuWidget;
     QStackedWidget* _MenusStackedWidget;
 

@@ -7,6 +7,7 @@
 
 namespace DefaultData
 {
+    // Settings menu data
     extern BgImages   BgImage;
     extern QString    BgImageStr;
 
@@ -21,6 +22,19 @@ namespace DefaultData
 
     extern bool       isSoundOn;
     extern bool       isDarkTheme;
+
+    // PVP menu data
+    extern bool          isTimeOn;
+    extern GameVariants  GameVariant;
+    extern QString       GameVariantsStr;
+
+    extern int           GameMinutes;
+    extern int           MinutesSliderIndex;
+    extern QString       MinutesSliderNumberStr;
+
+    extern int           GameIncSeconds;
+    extern int           IncSecondsIndex;
+    extern QString       IncSecondsNumberStr;
 }
 
 #endif // DEFAULTS_HPP

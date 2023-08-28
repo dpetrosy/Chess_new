@@ -379,5 +379,6 @@
         <file>styles/menus_styles/light_text.txt</file>
         <file>styles/menus_styles/light_theme_bg_label.txt</file>
         <file>styles/pieces_styles/pawn_prom_buttons_style.txt</file>
+        <file>images/menus/settings/boards/8_Bit.png</file>
     </qresource>
 </RCC>

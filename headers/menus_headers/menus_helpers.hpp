@@ -42,83 +42,112 @@ enum class PVPMenuProps
     BgLabelH = 589,
     BgLabelX = ((int)MainWindowProps::windowSizeW - BgLabelW) / 2,
     BgLabelY = ((int)MainWindowProps::windowSizeH - BgLabelH) / 2,
+
     TopTextLabelX = BgLabelX,
     TopTextLabelY = BgLabelY + 22,
     TopTextLabelW = BgLabelW,
     TopTextLabelH = 40,
+
     GameVariantTextLabelX = BgLabelX + 112,
     GameVariantTextLabelY = TopTextLabelY + 72,
+    GameVariantTextLabelW = 200,
+    GameVariantTextLabelH = 20,
+
     GameVariantComboBoxX = GameVariantTextLabelX + 57,
     GameVariantComboBoxY = GameVariantTextLabelY - 8,
     GameVariantComboBoxW = 157,
-    GameVariantComboBoxH = 41,
+    GameVariantComboBoxH = 35,
+
     TimeControlBgLabelX = BgLabelX,
     TimeControlBgLabelY = GameVariantTextLabelY + 49,
     TimeControlBgLabelW = BgLabelW,
     TimeControlBgLabelH = 323,
+
     TimeControlTextLabelX = TimeControlBgLabelX + 140,
     TimeControlTextLabelY = TimeControlBgLabelY + 16,
+    TimeControlTextLabelW = 100,
+    TimeControlTextLabelH = 20,
+
     TimeControlToggleSwitchX = TimeControlTextLabelX + 94,
     TimeControlToggleSwitchY = TimeControlTextLabelY - 10,
+
     MinutesTextLabelX = TimeControlTextLabelX + 5,
     MinutesTextLabelY = TimeControlTextLabelY + 41,
-    MinutesNumberTextLabelX = MinutesTextLabelX + 117,
-    MinutesNumberTextLabelY = MinutesTextLabelY + 3,
-    MinutesNumberTextLabelW = 30,
-    MinutesNumberTextLabelH = 15,
+    MinutesTextLabelW = 400,
+    MinutesTextLabelH = 20,
+
+    MinutesNumberLabelX = MinutesTextLabelX + 117,
+    MinutesNumberLabelY = MinutesTextLabelY + 3,
+    MinutesNumberLabelW = 30,
+    MinutesNumberLabelH = 15,
+
     MinutesSliderW = 360,
     MinutesSliderH = 25,
     MinutesSliderX = BgLabelX + (BgLabelW - MinutesSliderW) / 2,
     MinutesSliderY = MinutesTextLabelY + 30,
+
     IncSecondsTextLabelX = MinutesTextLabelX - 10,
     IncSecondsTextLabelY = MinutesSliderY + 44,
-    IncSecondsNumberTextLabelX = IncSecondsTextLabelX + 147,
-    IncSecondsNumberTextLabelY = IncSecondsTextLabelY + 3,
-    IncSecondsNumberTextLabelW = MinutesNumberTextLabelW,
-    IncSecondsNumberTextLabelH = MinutesNumberTextLabelH,
-    IncSecondsSliderW = MinutesSliderW,
-    IncSecondsSliderH = MinutesSliderH,
+    IncSecondsTextLabelW = MinutesTextLabelW,
+    IncSecondsTextLabelH = MinutesTextLabelH,
+
+    IncSecondsNumberLabelX = IncSecondsTextLabelX + 147,
+    IncSecondsNumberLabelY = IncSecondsTextLabelY + 3,
+    IncSecondsNumberLabelW = MinutesNumberLabelW,
+    IncSecondsNumberLabelH = MinutesNumberLabelH,
+
     IncSecondsSliderX = MinutesSliderX,
     IncSecondsSliderY = IncSecondsTextLabelY + 31,
+    IncSecondsSliderW = MinutesSliderW,
+    IncSecondsSliderH = MinutesSliderH,
+
     QuickGamesTextLabelX = IncSecondsTextLabelX + 36,
     QuickGamesTextLabelY = IncSecondsSliderY + 38,
-    Bullet1MButtonW = 58,
-    Bullet1MButtonH = 74,
+    QuickGamesTextLabelW = 200,
+    QuickGamesTextLabelH = 30,
+
+    // Quick game buttons sizes
+    StartGameButtonW = 58,
+    StartGameButtonH = 74,
+
     Bullet1MButtonX = BgLabelX + 15,
     Bullet1MButtonY = QuickGamesTextLabelY + 37,
-    Blitz3MButtonX = Bullet1MButtonX + Bullet1MButtonW + 12,
+
+    Blitz3MButtonX = Bullet1MButtonX + StartGameButtonW + 12,
     Blitz3MButtonY = Bullet1MButtonY,
-    Blitz3MInc2SecButtonX = Blitz3MButtonX + Bullet1MButtonW + 13,
+
+    Blitz3MInc2SecButtonX = Blitz3MButtonX + StartGameButtonW + 13,
     Blitz3MInc2SecButtonY = Bullet1MButtonY,
-    Blitz5MButtonX = Blitz3MInc2SecButtonX + Bullet1MButtonW + 13,
+
+    Blitz5MButtonX = Blitz3MInc2SecButtonX + StartGameButtonW + 13,
     Blitz5MButtonY = Bullet1MButtonY,
-    Blitz10MButtonX = Blitz5MButtonX + Bullet1MButtonW + 12,
+
+    Blitz10MButtonX = Blitz5MButtonX + StartGameButtonW + 12,
     Blitz10MButtonY = Bullet1MButtonY,
-    Rapid15MButtonX = Blitz10MButtonX + Bullet1MButtonW + 12,
+
+    Rapid15MButtonX = Blitz10MButtonX + StartGameButtonW + 12,
     Rapid15MButtonY = Bullet1MButtonY,
+
     RandomColorButtonW = 90,
     RandomColorButtonH = RandomColorButtonW,
     RandomColorButtonX = BgLabelX + ((BgLabelW - RandomColorButtonW) / 2),
-    RandomColorButtonY = Bullet1MButtonY + Bullet1MButtonH + 29,
+    RandomColorButtonY = Bullet1MButtonY + StartGameButtonH + 29,
+
     BlackColorButtonW = 70,
     BlackColorButtonH = BlackColorButtonW,
     BlackColorButtonX = RandomColorButtonX - BlackColorButtonW - 15,
     BlackColorButtonY = RandomColorButtonY + (RandomColorButtonH - BlackColorButtonH),
+
     WhiteColorButtonX = RandomColorButtonX + RandomColorButtonW + 15,
     WhiteColorButtonY = BlackColorButtonY,
+
     ReturnButtonW = 25,
     ReturnButtonH = 20,
     ReturnButtonX = BgLabelX + BgLabelW - ReturnButtonW - 8,
     ReturnButtonY = BgLabelY + BgLabelH - ReturnButtonH - 7,
 };
 
-enum class PVPMenuPushButtons
-{
-    PlayButton = 1,
-    ReturnButton = 2
-};
-
-enum class GameVariantsNumber
+enum class GameVariants
 {
     Standard,
     Chess960,
@@ -142,7 +171,7 @@ enum class StartGameButtons
     WhiteColor = 9
 };
 
-namespace StartGameButtonName
+namespace StartGameButtonsStr
 {
     extern QString NoSelected;
     extern QString Bullet1M;
@@ -156,7 +185,7 @@ namespace StartGameButtonName
     extern QString WhiteColor;
 }
 
-namespace GameVariants
+namespace GameVariantsStr
 {
     extern QString Standard;
     extern QString Chess960;

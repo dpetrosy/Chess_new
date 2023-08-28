@@ -222,17 +222,16 @@ QString getBoardStrByNumber(const Boards& board)
     }
 }
 
+void setQLabelImageByTheme(QLabel* label, QString lightThemePicturePath, QString darkThemePicturePath, bool isDarkTheme)
+{
+    if (isDarkTheme)
+        label->setPixmap(QPixmap(darkThemePicturePath));
+    else
+        label->setPixmap(QPixmap(lightThemePicturePath));
+}
 
 
 
-
-//void setQLabelPictureByTheme(QLabel* label, bool isDarkTheme, QString lightThemePicturePath, QString darkThemePicturePath)
-//{
-//    if (isDarkTheme)
-//        label->setPixmap(QPixmap(darkThemePicturePath));
-//    else
-//        label->setPixmap(QPixmap(lightThemePicturePath));
-//}
 
 //void copyVector2D(CharVector2D& dest, CharVector2D& source, int size)
 //{

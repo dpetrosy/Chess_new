@@ -17,16 +17,21 @@ public:
 
 public:
     // Getters
-    BgImages getBgImage() const;
+    const BgImages& getBgImage() const;
     const QString& getBgImageStr() const;
-    Languages getLanguage() const;
+    const Languages& getLanguage() const;
     const QString& getLanguageStr() const;
-    PieceSets getPieceSet() const;
+    const PieceSets& getPieceSet() const;
     const QString& getPieceSetStr() const;
-    Boards getBoard() const;
+    const Boards& getBoard() const;
     const QString& getBoardStr() const;
     const bool& isSoundOn() const;
     const bool& isDarkTheme() const;
+
+    const GameVariants& getGameVariant() const;
+    const bool& isTimeOn() const;
+    const int& getGameMinutes() const;
+    const int& getGameIncSeconds() const;
 
     //Setters
     void setBgImage(BgImages bgImage);
@@ -35,6 +40,11 @@ public:
     void setBoard(Boards board);
     void setSound(bool isSoundOn);
     void setTheme(bool isDarkTheme);
+
+    void setGameVariant(GameVariants gameVariant);
+    void setTime(bool isTimeOn);
+    void setGameMinutes(int gameMinutes);
+    void setGameIncSeconds(int gameIncSeconds);
 
     // Public functions
     void resetTempData(SettingsData* tempData) const;
@@ -50,24 +60,26 @@ private:
     static DataCollector* _DataCollector;
 
     // Settings data
-    BgImages   _bgImage;
-    QString    _bgImageStr;
+    BgImages      _bgImage;
+    QString       _bgImageStr;
 
-    Languages  _language;
-    QString    _languageStr;
+    Languages     _language;
+    QString       _languageStr;
 
-    PieceSets  _pieceSet;
-    QString    _pieceSetStr;
+    PieceSets     _pieceSet;
+    QString       _pieceSetStr;
 
-    Boards     _board;
-    QString    _boardStr;
+    Boards        _board;
+    QString       _boardStr;
 
-    bool       _isSoundOn;
-    bool       _isDarkTheme;
+    bool          _isSoundOn;
+    bool          _isDarkTheme;
+
+    // Game data
+    GameVariants  _gameVariant;
+    bool          _isTimeOn;
+    int           _GameMinutes;
+    int           _GameIncSeconds;
 };
 
 #endif // DATACOLLECTOR_HPP
-
-
-
-

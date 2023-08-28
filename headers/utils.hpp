@@ -18,9 +18,8 @@ QString  getBgImageStrByNumber(const BgImages& bgImage);
 QString  getLanguageStrByNumber(const Languages& language);
 QString  getPieceSetStrByNumber(const PieceSets& pieceSet);
 QString  getBoardStrByNumber(const Boards& board);
+void     setQLabelImageByTheme(QLabel* label, QString lightThemeImagePath, QString darkThemeImagePath, bool isDarkTheme);
 
-
-//void     setQLabelPictureByTheme(QLabel* label, bool isDarkTheme, QString lightThemePicturePath, QString darkThemePicturePath);
 //void     copyVector2D(CharVector2D& dest, CharVector2D& source, int size);
 //void     resetCharVector2D(CharVector2D& vector2D, int size, char symbol);
 

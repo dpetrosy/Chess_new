@@ -34,10 +34,16 @@ void DataCollector::init()
     _boardStr = DefaultData::BoardStr;
     _isSoundOn = DefaultData::isSoundOn;
     _isDarkTheme = DefaultData::isDarkTheme;
+
+    // Game data
+    _gameVariant = DefaultData::GameVariant;
+    _isTimeOn = DefaultData::isTimeOn;
+    _GameMinutes = DefaultData::GameMinutes;
+    _GameIncSeconds = DefaultData::GameIncSeconds;
 }
 
 // Getters
-BgImages DataCollector::getBgImage() const
+const BgImages& DataCollector::getBgImage() const
 {
     return _bgImage;
 }
@@ -47,7 +53,7 @@ const QString& DataCollector::getBgImageStr() const
     return _bgImageStr;
 }
 
-Languages DataCollector::getLanguage() const
+const Languages& DataCollector::getLanguage() const
 {
     return _language;
 }
@@ -57,7 +63,7 @@ const QString& DataCollector::getLanguageStr() const
     return _languageStr;
 }
 
-PieceSets DataCollector::getPieceSet() const
+const PieceSets& DataCollector::getPieceSet() const
 {
     return _pieceSet;
 }
@@ -67,7 +73,7 @@ const QString& DataCollector::getPieceSetStr() const
     return _pieceSetStr;
 }
 
-Boards DataCollector::getBoard() const
+const Boards& DataCollector::getBoard() const
 {
     return _board;
 }
@@ -85,6 +91,26 @@ const bool& DataCollector::isSoundOn() const
 const bool& DataCollector::isDarkTheme() const
 {
     return _isDarkTheme;
+}
+
+const GameVariants& DataCollector::getGameVariant() const
+{
+    return _gameVariant;
+}
+
+const bool& DataCollector::isTimeOn() const
+{
+    return _isTimeOn;
+}
+
+const int& DataCollector::getGameMinutes() const
+{
+    return _GameMinutes;
+}
+
+const int& DataCollector::getGameIncSeconds() const
+{
+    return _GameIncSeconds;
 }
 
 //Setters
@@ -120,6 +146,26 @@ void DataCollector::setSound(bool isSoundOn)
 void DataCollector::setTheme(bool isDarkTheme)
 {
     _isDarkTheme = isDarkTheme;
+}
+
+void DataCollector::setGameVariant(GameVariants gameVariant)
+{
+    _gameVariant = gameVariant;
+}
+
+void DataCollector::setTime(bool isTimeOn)
+{
+    _isTimeOn = isTimeOn;
+}
+
+void DataCollector::setGameMinutes(int gameMinutes)
+{
+    _GameMinutes = gameMinutes;
+}
+
+void DataCollector::setGameIncSeconds(int gameIncSeconds)
+{
+    _GameIncSeconds = gameIncSeconds;
 }
 
 // Public functions
