@@ -10,28 +10,11 @@ namespace ImagesPaths
     // Menus images
     QString MenusImagesPath = ImagesPath + "menus/";
 
-    //
-    // Settings menu paths
-    //
-
-    // Settings menu
-    QString SettingsPath = MenusImagesPath + "settings/";
-    QString SettingsBoardsPath = SettingsPath + "boards/";
-    QString SettingsPiecesSetsPath = SettingsPath + "pieces_sets/";
-
-    // Background images
-    QString BackgroundsPath = ImagesPath + "backgrounds/";
-    QString LightThemeGameBg = "light_theme_game_Bg";
-    QString DarkThemeGameBg = "dark_theme_game_Bg";
-
-    // Boards images
-    QString BoardsPath = ImagesPath + "boards/";
-
 
     //
     // PVP menu paths
     //
-    QString PVPMenuPath = MenusImagesPath + "pvp/";
+    QString PVPMenuPath = MenusImagesPath + "pvp_menu/";
     QString ReturnButtonPath = PVPMenuPath + "return_button/";
 
     QString LightStartButtonsPath = PVPMenuPath + "light_start_buttons/";
@@ -81,6 +64,35 @@ namespace ImagesPaths
     QString DarkRandomColorHoverButton = DarkHoverStartButtonsPath + "random_color_hover.png";
 
 
+    //
+    // Game menu paths
+    //
+    QString GameMenuPath = MenusImagesPath + "game_menu/";
+    QString GameMenuLightReturnButton = GameMenuPath + "light_return_button.png";
+    QString GameMenuDarkReturnButton = GameMenuPath + "dark_return_button.png";
+
+
+    //
+    // Settings menu paths
+    //
+
+    // Settings menu
+    QString SettingsPath = MenusImagesPath + "settings_menu/";
+    QString SettingsBoardsPath = SettingsPath + "boards/";
+    QString SettingsPiecesSetsPath = SettingsPath + "pieces_sets/";
+
+    // Background images
+    QString BackgroundsPath = ImagesPath + "backgrounds/";
+
+    // Boards images
+    QString BoardsPath = ImagesPath + "boards/";
+    QString WhitePlayerBoardsPath = BoardsPath + "white/";
+    QString BlackPlayerBoardsPath = BoardsPath + "black/";
+
+
+
+
+
 
 
 
@@ -121,12 +133,7 @@ namespace ImagesPaths
     QString NeoPath = ImagesPath + "Neo";
     QString OceanPath = ImagesPath + "Ocean";
 
-    // GameWidget images
-    QString GameWidgetPath = ImagesPath + "game_widget/";
-    QString GameWidgetReturnButtonPath = GameWidgetPath + "return_button/";
 
-    QString GameWidgetLightReturnButton = GameWidgetReturnButtonPath + "light_return_button.png";
-    QString GameWidgetDarkReturnButton = GameWidgetReturnButtonPath + "dark_return_button.png";
 }
 
 namespace StepsImages

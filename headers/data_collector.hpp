@@ -32,6 +32,7 @@ public:
     const bool& isTimeOn() const;
     const int& getGameMinutes() const;
     const int& getGameIncSeconds() const;
+    const PlayerColors& getPlayerColor() const;
 
     //Setters
     void setBgImage(BgImages bgImage);
@@ -45,6 +46,7 @@ public:
     void setTime(bool isTimeOn);
     void setGameMinutes(int gameMinutes);
     void setGameIncSeconds(int gameIncSeconds);
+    void setPlayerColor(PlayerColors playerColor);
 
     // Public functions
     void resetTempData(SettingsData* tempData) const;
@@ -80,6 +82,7 @@ private:
     bool          _isTimeOn;
     int           _GameMinutes;
     int           _GameIncSeconds;
+    PlayerColors  _PlayerColor;
 };
 
 #endif // DATACOLLECTOR_HPP

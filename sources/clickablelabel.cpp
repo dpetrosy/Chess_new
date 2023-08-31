@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <Qt>
 
-#include "clickablelabel.hpp"
+#include "clickable_label.hpp"
 
 ClickableLabel::ClickableLabel(QWidget* parent) : QLabel(parent)
 {}

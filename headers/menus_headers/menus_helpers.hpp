@@ -181,9 +181,9 @@ enum class StartGameButtons
     Blitz5M,
     Blitz10M,
     Rapid15M,
-    WhiteColor,
-    BlackColor,
-    RandomColor,
+    White,
+    Black,
+    Random,
 };
 
 namespace StartGameButtonsStr
@@ -200,6 +200,20 @@ namespace StartGameButtonsStr
     extern QString RandomColor;
 }
 
+enum class MinutesSliderIndexes
+{
+    Min1 = 3,
+    Min3 = 6,
+    Min5 = 8,
+    Min10 = 13,
+    Min15 = 18,
+};
+
+enum class PlayerColors
+{
+    Black,
+    White,
+};
 
 //
 // SettingsMenu
@@ -312,6 +326,8 @@ enum class BgImages
     TheQueen,
     TheRook,
     TopView,
+    WhiteThemeGameBg,
+    DarkThemeGameBg,
 };
 
 namespace BgImagesStr
@@ -335,6 +351,8 @@ namespace BgImagesStr
     extern QString TheQueen;
     extern QString TheRook;
     extern QString TopView;
+    extern QString WhiteThemeGameBg;
+    extern QString DarkThemeGameBg;
 }
 
 enum class Boards

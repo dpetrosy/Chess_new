@@ -64,6 +64,8 @@ QString getBgImageStrByNumber(const BgImages& bgImage)
 {
     switch (bgImage)
     {
+    default: /* BgImages::TheRook */
+        return BgImagesStr::TheRook;
     case BgImages::AngelView:
         return BgImagesStr::AngelView;
     case BgImages::Blacked:
@@ -98,8 +100,10 @@ QString getBgImageStrByNumber(const BgImages& bgImage)
         return BgImagesStr::TheQueen;
     case BgImages::TopView:
         return BgImagesStr::TopView;
-    default:
-        return BgImagesStr::TheRook;
+    case BgImages::WhiteThemeGameBg:
+        return BgImagesStr::WhiteThemeGameBg;
+    case BgImages::DarkThemeGameBg:
+        return BgImagesStr::DarkThemeGameBg;
     }
 }
 

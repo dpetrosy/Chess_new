@@ -1,5 +1,5 @@
-#ifndef CLICKABLELABEL_HPP
-#define CLICKABLELABEL_HPP
+#ifndef CLICKABLE_LABEL_HPP
+#define CLICKABLE_LABEL_HPP
 
 #include <QLabel>
 
@@ -18,4 +18,4 @@ private:
     virtual void mousePressEvent(QMouseEvent* event);
 };
 
-#endif // CLICKABLELABEL_HPP
+#endif // CLICKABLE_LABEL_HPP

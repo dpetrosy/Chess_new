@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QRandomGenerator>
 
 #include "pvpmenu.hpp"
 #include "mainwindow.hpp"
@@ -87,9 +88,9 @@ void PVPMenu::init()
     _rapid15MButton = new StartGameButton(this, StartGameButtons::Rapid15M);
 
     /* Color buttons */
-    _whiteColorButton = new StartGameButton(this, StartGameButtons::WhiteColor);
-    _blackColorButton = new StartGameButton(this, StartGameButtons::BlackColor);
-    _randomColorButton = new StartGameButton(this, StartGameButtons::RandomColor);
+    _whiteColorButton = new StartGameButton(this, StartGameButtons::White);
+    _blackColorButton = new StartGameButton(this, StartGameButtons::Black);
+    _randomColorButton = new StartGameButton(this, StartGameButtons::Random);
 
     /* Return button */
     _returnButton = new ClickableLabel(this);
@@ -199,49 +200,59 @@ void PVPMenu::makePVPMenu()
     _bullet1MButton->move((int)PVPMenuProps::Bullet1MButtonX, (int)PVPMenuProps::Bullet1MButtonY);
     setStyleSheetByTheme(_bullet1MButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkQuickGamesButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_bullet1MButton, ImagesPaths::LightBullet1MButton, ImagesPaths::DarkBullet1MButton, isDarkTheme);
+    connect(_bullet1MButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::quickGameButtonClicked, this, StartGameButtons::Bullet1M));
 
     /* Blitz 3M button */
     _blitz3MButton->move((int)PVPMenuProps::Blitz3MButtonX, (int)PVPMenuProps::Blitz3MButtonY);
     setStyleSheetByTheme(_blitz3MButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkQuickGamesButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_blitz3MButton, ImagesPaths::LightBlitz3MButton, ImagesPaths::DarkBlitz3MButton, isDarkTheme);
+    connect(_blitz3MButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::quickGameButtonClicked, this, StartGameButtons::Blitz3M));
 
     /* Blitz 3M increment 2sec button */
     _blitz3MInc2SecButton->move((int)PVPMenuProps::Blitz3MInc2SecButtonX, (int)PVPMenuProps::Blitz3MInc2SecButtonY);
     setStyleSheetByTheme(_blitz3MInc2SecButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkQuickGamesButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_blitz3MInc2SecButton, ImagesPaths::LightBlitz3MInc2SecButton, ImagesPaths::DarkBlitz3MInc2SecButton, isDarkTheme);
+    connect(_blitz3MInc2SecButton, &StartGameButton::clickedLeftButton, this,
+            std::bind(&PVPMenu::quickGameButtonClicked, this, StartGameButtons::Blitz3MInc2Sec));
 
     /* Blitz 5M button */
     _blitz5MButton->move((int)PVPMenuProps::Blitz5MButtonX, (int)PVPMenuProps::Blitz5MButtonY);
     setStyleSheetByTheme(_blitz5MButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkQuickGamesButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_blitz5MButton, ImagesPaths::LightBlitz5MButton, ImagesPaths::DarkBlitz5MButton, isDarkTheme);
+    connect(_blitz5MButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::quickGameButtonClicked, this, StartGameButtons::Blitz5M));
 
     /* Blitz 10M button */
     _blitz10MButton->move((int)PVPMenuProps::Blitz10MButtonX, (int)PVPMenuProps::Blitz10MButtonY);
     setStyleSheetByTheme(_blitz10MButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkQuickGamesButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_blitz10MButton, ImagesPaths::LightBlitz10MButton, ImagesPaths::DarkBlitz10MButton, isDarkTheme);
+    connect(_blitz10MButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::quickGameButtonClicked, this, StartGameButtons::Blitz10M));
 
     /* Rapid 15M button */
     _rapid15MButton->move((int)PVPMenuProps::Rapid15MButtonX, (int)PVPMenuProps::Rapid15MButtonY);
     setStyleSheetByTheme(_rapid15MButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkQuickGamesButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_rapid15MButton, ImagesPaths::LightRapid15MButton, ImagesPaths::DarkRapid15MButton, isDarkTheme);
+    connect(_rapid15MButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::quickGameButtonClicked, this, StartGameButtons::Rapid15M));
 
     /* White color button */
     _whiteColorButton->move((int)PVPMenuProps::WhiteColorButtonX, (int)PVPMenuProps::WhiteColorButtonY);
     setStyleSheetByTheme(_whiteColorButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkColorButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_whiteColorButton, ImagesPaths::LightWhiteColorButton, ImagesPaths::DarkWhiteColorButton, isDarkTheme);
     _whiteColorButton->setCursor(Qt::PointingHandCursor);
+    connect(_whiteColorButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::startGameButtonClicked, this, StartGameButtons::White));
 
     /* Black color button */
     _blackColorButton->move((int)PVPMenuProps::BlackColorButtonX, (int)PVPMenuProps::BlackColorButtonY);
     setStyleSheetByTheme(_blackColorButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkColorButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_blackColorButton, ImagesPaths::LightBlackColorButton, ImagesPaths::DarkBlackColorButton, isDarkTheme);
     _blackColorButton->setCursor(Qt::PointingHandCursor);
+    connect(_blackColorButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::startGameButtonClicked, this, StartGameButtons::Black));
 
     /* Random color button */
     _randomColorButton->move((int)PVPMenuProps::RandomColorButtonX, (int)PVPMenuProps::RandomColorButtonY);
     setStyleSheetByTheme(_randomColorButton, StylesPaths::lightQuickGamesButtonStyle, StylesPaths::darkColorButtonStyle, isDarkTheme);
     setQLabelImageByTheme(_randomColorButton, ImagesPaths::LightRandomColorButton, ImagesPaths::DarkRandomColorButton, isDarkTheme);
     _randomColorButton->setCursor(Qt::PointingHandCursor);
+    connect(_randomColorButton, &StartGameButton::clickedLeftButton, this, std::bind(&PVPMenu::startGameButtonClicked, this, StartGameButtons::Random));
 
     /* Return button */
     _returnButton->move((int)PVPMenuProps::ReturnButtonX, (int)PVPMenuProps::ReturnButtonY);
@@ -459,37 +470,76 @@ void PVPMenu::incSecondsSliderValueChanged(int index)
     _incSecondsNumberLabel->setText(QString::number(value));
 }
 
+void PVPMenu::quickGameButtonClicked(StartGameButtons button)
+{
+    auto dataCollector = DataCollector::GetInstance();
+    bool isTimeOn = dataCollector->isTimeOn();
+
+    switch (button)
+    {
+    default: /* StartGameButtons::Bullet1M */
+        _minutesSlider->setValue((int)MinutesSliderIndexes::Min1);
+        break;
+    case StartGameButtons::Blitz3M:
+    case StartGameButtons::Blitz3MInc2Sec:
+        _minutesSlider->setValue((int)MinutesSliderIndexes::Min3);
+        break;
+    case StartGameButtons::Blitz5M:
+        _minutesSlider->setValue((int)MinutesSliderIndexes::Min5);
+        break;
+    case StartGameButtons::Blitz10M:
+        _minutesSlider->setValue((int)MinutesSliderIndexes::Min10);
+        break;
+    case StartGameButtons::Rapid15M:
+        _minutesSlider->setValue((int)MinutesSliderIndexes::Min15);
+        break;
+    }
+
+    /* Set increment seconds */
+    if (button == StartGameButtons::Blitz3MInc2Sec)
+        _incSecondsSlider->setValue(2);
+    else
+        _incSecondsSlider->setValue(0);
+
+    /* If time is not enabled, turn it on */
+    if (!isTimeOn)
+        swapTimeControl();
+
+    /* Randomly choose player color */
+    if (QRandomGenerator::global()->bounded(0, 2) == 0)
+        dataCollector->setPlayerColor(PlayerColors::Black);
+    else
+        dataCollector->setPlayerColor(PlayerColors::White);
+
+    /* Switch to GameMenu */
+    switchMenu(MainWindow::GetInstance(), Menus::GameMenu);
+}
+
+void PVPMenu::startGameButtonClicked(StartGameButtons button)
+{
+    auto dataCollector = DataCollector::GetInstance();
+
+    switch (button)
+    {
+    default: /* StartGameButtons::White */
+        dataCollector->setPlayerColor(PlayerColors::White);
+        break;
+    case StartGameButtons::Black:
+        dataCollector->setPlayerColor(PlayerColors::Black);
+        break;
+    case StartGameButtons::Random:
+        if (QRandomGenerator::global()->bounded(0, 2) == 0)
+            dataCollector->setPlayerColor(PlayerColors::Black);
+        else
+            dataCollector->setPlayerColor(PlayerColors::White);
+        break;
+    }
+
+    /* Switch to GameMenu */
+    switchMenu(MainWindow::GetInstance(), Menus::GameMenu);
+}
+
 void PVPMenu::returnToMainMenu()
 {
     switchMenu(MainWindow::GetInstance(), Menus::MainMenu);
 }
-
-
-
-
-
-
-
-//void PVPMenu::setDataBeforeStartGame(double minutes, int incSeconds, PiecesColors color)
-//{
-//    auto gameWidget = GameWidget::GetInstance();
-
-//    // Quick game button clicked
-//    if (minutes != 0 || incSeconds != 0)
-//    {
-//        gameWidget->setIsTimeAvailable(true);
-//        gameWidget->setGameMinutes(minutes);
-//        gameWidget->setIncrementSeconds(incSeconds);
-//        gameWidget->setGameVariant(GameVariants::Standard);
-//    }
-
-//    if (color == PiecesColors::Random)
-//    {
-//        if (QRandomGenerator::global()->bounded(0, 2) == 0)
-//            color = PiecesColors::Black;
-//        else
-//            color = PiecesColors::White;
-//    }
-
-//    gameWidget->setBelowPlayerColor(color);
-//}

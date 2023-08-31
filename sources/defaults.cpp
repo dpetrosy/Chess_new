@@ -20,6 +20,7 @@ namespace DefaultData
 
     // PVP menu data
     bool isTimeOn = false;
+    PlayerColors playerColor = PlayerColors::White;
     GameVariants GameVariant = GameVariants::Standard;
     QString GameVariantsStr = GameVariantsStr::Standard;
 

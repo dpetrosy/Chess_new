@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QSlider>
 
+#include "menus_helpers.hpp"
 #include "predefined_classes.hpp"
 
 // Command pattern used
@@ -24,6 +25,8 @@ private slots:
     void swapTimeControl();
     void minutesSliderValueChanged(int index);
     void incSecondsSliderValueChanged(int index);
+    void quickGameButtonClicked(StartGameButtons button);
+    void startGameButtonClicked(StartGameButtons button);
     void returnToMainMenu();
 
 private:

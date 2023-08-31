@@ -2,7 +2,7 @@
 #define START_GAME_BUTTON_HPP
 
 #include "menus_helpers.hpp"
-#include "clickablelabel.hpp"
+#include "clickable_label.hpp"
 
 class StartGameButton : public ClickableLabel
 {

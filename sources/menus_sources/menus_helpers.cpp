@@ -72,6 +72,8 @@ namespace BgImagesStr
     QString TheQueen = "The Queen";
     QString TheRook = "The Rook";
     QString TopView = "Top View";
+    QString WhiteThemeGameBg = "Light_theme_game_bg";
+    QString DarkThemeGameBg = "Dark_theme_game_bg";
 }
 
 namespace BoardsStr

@@ -14,6 +14,9 @@ SOURCES += \
     sources/clickablelabel.cpp \
     sources/data_collector.cpp \
     sources/defaults.cpp \
+    sources/game_sources/game_data.cpp \
+    sources/game_sources/game_widget.cpp \
+    sources/game_sources/gamemenu.cpp \
     sources/main.cpp \
     sources/mainwindow.cpp \
     sources/menus_sources/mainmenu.cpp \
@@ -29,9 +32,13 @@ SOURCES += \
 
 
 HEADERS += \
-    headers/clickablelabel.hpp \
+    headers/clickable_label.hpp \
     headers/data_collector.hpp \
     headers/defaults.hpp \
+    headers/game_headers/game_data.hpp \
+    headers/game_headers/game_helpers.hpp \
+    headers/game_headers/game_widget.hpp \
+    headers/game_headers/gamemenu.hpp \
     headers/helpers.hpp \
     headers/mainwindow.hpp \
     headers/menus_headers/mainmenu.hpp \
@@ -50,6 +57,7 @@ HEADERS += \
 INCLUDEPATH += \
     headers/ \
     headers/menus_headers/ \
+    headers/game_headers/ \
 
 
 

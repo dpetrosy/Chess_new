@@ -113,6 +113,11 @@ const int& DataCollector::getGameIncSeconds() const
     return _GameIncSeconds;
 }
 
+const PlayerColors& DataCollector::getPlayerColor() const
+{
+    return _PlayerColor;
+}
+
 //Setters
 void DataCollector::setBgImage(BgImages bgImage)
 {
@@ -166,6 +171,11 @@ void DataCollector::setGameMinutes(int gameMinutes)
 void DataCollector::setGameIncSeconds(int gameIncSeconds)
 {
     _GameIncSeconds = gameIncSeconds;
+}
+
+void DataCollector::setPlayerColor(PlayerColors playerColor)
+{
+    _PlayerColor = playerColor;
 }
 
 // Public functions

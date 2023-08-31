@@ -11,9 +11,9 @@ enum class Menus
 {
     MainMenu,
     PVPMenu,
+    GameMenu,
     SettingsMenu,
     QuitMenu,
-    GameWidget,
 };
 
 #endif // HELPERS_HPP

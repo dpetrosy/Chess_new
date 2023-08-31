@@ -25,6 +25,7 @@ namespace DefaultData
 
     // PVP menu data
     extern bool          isTimeOn;
+    extern PlayerColors  PlayerColor;
     extern GameVariants  GameVariant;
     extern QString       GameVariantsStr;
 
@@ -35,6 +36,7 @@ namespace DefaultData
     extern int           GameIncSeconds;
     extern int           IncSecondsIndex;
     extern QString       IncSecondsNumberStr;
+
 }
 
 #endif // DEFAULTS_HPP

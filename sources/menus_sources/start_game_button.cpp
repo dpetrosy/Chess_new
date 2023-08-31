@@ -43,10 +43,10 @@ void StartGameButton::enterEvent(QEnterEvent* event)
         case StartGameButtons::Rapid15M:
             changeImg(ImagesPaths::DarkRapid15MHoverButton, StylesPaths::darkQuickGamesHoverButtonStyle);
             break;
-        case StartGameButtons::BlackColor:
+        case StartGameButtons::Black:
             changeImg(ImagesPaths::DarkBlackColorHoverButton, StylesPaths::darkQuickGamesHoverButtonStyle);
             break;
-        case StartGameButtons::WhiteColor:
+        case StartGameButtons::White:
             changeImg(ImagesPaths::DarkWhiteColorHoverButton, StylesPaths::darkQuickGamesHoverButtonStyle);
             break;
         }
@@ -76,10 +76,10 @@ void StartGameButton::enterEvent(QEnterEvent* event)
         case StartGameButtons::Rapid15M:
             changeImg(ImagesPaths::LightRapid15MHoverButton, StylesPaths::lightQuickGamesHoverButtonStyle);
             break;
-        case StartGameButtons::BlackColor:
+        case StartGameButtons::Black:
             changeImg(ImagesPaths::LightBlackColorHoverButton, StylesPaths::lightQuickGamesHoverButtonStyle);
             break;
-        case StartGameButtons::WhiteColor:
+        case StartGameButtons::White:
             changeImg(ImagesPaths::LightWhiteColorHoverButton, StylesPaths::lightQuickGamesHoverButtonStyle);
             break;
         }
@@ -117,10 +117,10 @@ void StartGameButton::leaveEvent(QEvent* event)
         case StartGameButtons::Rapid15M:
             changeImg(ImagesPaths::DarkRapid15MButton, StylesPaths::darkQuickGamesButtonStyle);
             break;
-        case StartGameButtons::BlackColor:
+        case StartGameButtons::Black:
             changeImg(ImagesPaths::DarkBlackColorButton, StylesPaths::darkQuickGamesButtonStyle);
             break;
-        case StartGameButtons::WhiteColor:
+        case StartGameButtons::White:
             changeImg(ImagesPaths::DarkWhiteColorButton, StylesPaths::darkQuickGamesButtonStyle);
             break;
         }
@@ -150,10 +150,10 @@ void StartGameButton::leaveEvent(QEvent* event)
         case StartGameButtons::Rapid15M:
             changeImg(ImagesPaths::LightRapid15MButton, StylesPaths::lightQuickGamesButtonStyle);
             break;
-        case StartGameButtons::BlackColor:
+        case StartGameButtons::Black:
             changeImg(ImagesPaths::LightBlackColorButton, StylesPaths::lightQuickGamesButtonStyle);
             break;
-        case StartGameButtons::WhiteColor:
+        case StartGameButtons::White:
             changeImg(ImagesPaths::LightWhiteColorButton, StylesPaths::lightQuickGamesButtonStyle);
             break;
         }
@@ -194,10 +194,10 @@ void StartGameButton::setButtonStr()
     case StartGameButtons::Rapid15M:
         _buttonStr = StartGameButtonsStr::Rapid15M;
         break;
-    case StartGameButtons::WhiteColor:
+    case StartGameButtons::White:
         _buttonStr = StartGameButtonsStr::WhiteColor;
         break;
-    case StartGameButtons::BlackColor:
+    case StartGameButtons::Black:
         _buttonStr = StartGameButtonsStr::BlackColor;
         break;
     }

@@ -13,26 +13,9 @@ namespace ImagesPaths
     // Menus images
     extern QString MenusImagesPath;
 
-    //
-    // Settings menu paths
-    //
-
-    // Settings images
-    extern QString SettingsPath;
-    extern QString SettingsBoardsPath;
-    extern QString SettingsPiecesSetsPath;
-
-    // Background images
-    extern QString BackgroundsPath;
-    extern QString LightThemeGameBg;
-    extern QString DarkThemeGameBg;
-
-    // Boards images
-    extern QString BoardsPath;
-
 
     //
-    // PVP menu paths
+    // PVP menu images
     //
     extern QString PVPMenuPath;
 
@@ -82,6 +65,36 @@ namespace ImagesPaths
     extern QString DarkBlackColorHoverButton;
     extern QString DarkRandomColorHoverButton;
 
+    //
+    // Game menu images
+    //
+    extern QString GameMenuPath;
+    extern QString GameMenuLightReturnButton;
+    extern QString GameMenuDarkReturnButton;
+
+
+    //
+    // Settings menu images
+    //
+
+    // Settings images
+    extern QString SettingsPath;
+    extern QString SettingsBoardsPath;
+    extern QString SettingsPiecesSetsPath;
+
+    // Background images
+    extern QString BackgroundsPath;
+    extern QString LightThemeGameBg;
+    extern QString DarkThemeGameBg;
+
+    // Boards images
+    extern QString BoardsPath;
+    extern QString WhitePlayerBoardsPath;
+    extern QString BlackPlayerBoardsPath;
+
+
+
+
 
 
 
@@ -110,15 +123,6 @@ namespace ImagesPaths
     extern QString MeridaPath;
     extern QString NeoPath;
     extern QString OceanPath;
-
-
-
-    // GameWidget images
-    extern QString GameWidgetPath;
-    extern QString GameWidgetReturnButtonPath;
-
-    extern QString GameWidgetLightReturnButton;
-    extern QString GameWidgetDarkReturnButton;
 
     // Steps images
     extern QString stepsPath;

@@ -6,6 +6,7 @@
 #include "mainmenu.hpp"
 #include "pvpmenu.hpp"
 #include "settingsmenu.hpp"
+#include "gamemenu.hpp"
 #include "data_collector.hpp"
 #include "utils.hpp"
 #include "paths.hpp"
@@ -37,8 +38,8 @@ MainWindow::~MainWindow()
     delete _PVPMenuWidget;
     delete _SettingsMenuWidget;
 
-    // Chess game attributes
-    //delete _GameWidget;
+    // Game Widgets
+    delete _GameMenuWidget;
 
     // StackedWidgets
     delete _MenusStackedWidget;
@@ -64,6 +65,9 @@ void MainWindow::init()
     _PVPMenuWidget = new PVPMenu();
     _SettingsMenuWidget = new SettingsMenu();
 
+    // Game Widgets
+    _GameMenuWidget = GameMenu::GetInstance();
+
     // Menus StackedWidget
     _MenusStackedWidget = new QStackedWidget(this);
 }
@@ -73,7 +77,12 @@ void MainWindow::setBackgroundImage(const BgImages& bgImage)
 {
     QString image = getBgImageStrByNumber(bgImage);
     image = replaceSpaceInString(image);
+
+    qDebug() << ImagesPaths::BackgroundsPath + image + BgImagesStr::Extencion;
+
     _backgroundImage.load(ImagesPaths::BackgroundsPath + image + BgImagesStr::Extencion);
+    qDebug() << _backgroundImage.isNull();
+
     _backgroundImage = _backgroundImage.scaled(this->size(), Qt::IgnoreAspectRatio);
     _palette.setBrush(QPalette::Window, _backgroundImage);
     this->setPalette(_palette);
@@ -111,6 +120,11 @@ PVPMenu* MainWindow::getPVPMenu()
     return _PVPMenuWidget;
 }
 
+GameMenu* MainWindow::getGameMenu()
+{
+    return _GameMenuWidget;
+}
+
 SettingsMenu* MainWindow::getSettingsMenu()
 {
     return _SettingsMenuWidget;
@@ -129,19 +143,25 @@ void MainWindow::exitFromProgram(int signal)
 
 void MainWindow::makeMenusStackedWidget()
 {
-    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget, _PVPMenuWidget, _SettingsMenuWidget);
+    makeStackedWidget(_MenusStackedWidget, _MainMenuWidget, _PVPMenuWidget, _GameMenuWidget, _SettingsMenuWidget);
 }
 
 // Util functions
 void switchMenu(MainWindow* mainWindow, Menus toMenu)
 {
+    if (toMenu != Menus::QuitMenu)
+        mainWindow->getStackedWidget()->setCurrentIndex((int)toMenu);
+
     switch (toMenu)
     {
-    default:
+    default: /* Menus::MainMenu */
         mainWindow->getMainMenu()->makeMenuBeforeSwitch(mainWindow);
         break;
     case Menus::PVPMenu:
         mainWindow->getPVPMenu()->makeMenuBeforeSwitch();
+        break;
+    case Menus::GameMenu:
+        mainWindow->getGameMenu()->makeMenuBeforeSwitch();
         break;
     case Menus::SettingsMenu:
         mainWindow->getSettingsMenu()->makeMenuBeforeSwitch();
@@ -150,7 +170,4 @@ void switchMenu(MainWindow* mainWindow, Menus toMenu)
         mainWindow->showQuitWindow();
         break;
     }
-
-    if (toMenu != Menus::QuitMenu)
-        mainWindow->getStackedWidget()->setCurrentIndex((int)toMenu);
 }

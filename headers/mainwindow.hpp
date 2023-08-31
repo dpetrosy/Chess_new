@@ -27,6 +27,7 @@ public:
     // Getters
     MainMenu*        getMainMenu();
     PVPMenu*         getPVPMenu();
+    GameMenu*        getGameMenu();
     SettingsMenu*    getSettingsMenu();
     QStackedWidget*  getStackedWidget();
 
@@ -56,6 +57,7 @@ private:
     // Singleton pattern realization
     static MainWindow*  _mainWindow;
 
+    // Data collector
     DataCollector*      _dataCollector;
 
     // Images
@@ -67,6 +69,9 @@ private:
     PVPMenu*            _PVPMenuWidget;
     SettingsMenu*       _SettingsMenuWidget;
     QStackedWidget*     _MenusStackedWidget;
+
+    // Game Widgets
+    GameMenu*           _GameMenuWidget;
 };
 
 // Util functions
